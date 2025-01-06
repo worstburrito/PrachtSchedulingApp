@@ -83,6 +83,7 @@
             this.Controls.Add(this.dgvManageCustomerRecords);
             this.Name = "ManageCustomerRecords";
             this.Text = "Manage Customer Records";
+            this.Load += new System.EventHandler(this.ManageCustomerRecords_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvManageCustomerRecords)).EndInit();
             this.ResumeLayout(false);
 

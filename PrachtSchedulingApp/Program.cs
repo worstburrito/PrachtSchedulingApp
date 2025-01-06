@@ -18,9 +18,7 @@ namespace PrachtSchedulingApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            DBConnection.startConnection();
             Application.Run(new Login());
-            DBConnection.closeConnection();
         }
     }
 }

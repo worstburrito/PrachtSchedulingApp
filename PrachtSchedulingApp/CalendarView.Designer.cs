@@ -31,10 +31,9 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.btnFindAppointments = new System.Windows.Forms.Button();
-            this.dgvDisplayAppointments = new System.Windows.Forms.DataGridView();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.lblStartDate = new System.Windows.Forms.Label();
-            this.lblEndDate = new System.Windows.Forms.Label();
+            this.dgvDisplayAppointments = new System.Windows.Forms.DataGridView();
+            this.btnReset = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDisplayAppointments)).BeginInit();
             this.SuspendLayout();
@@ -42,14 +41,13 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.81828F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.97655F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.20516F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.26291F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 249F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 61.73709F));
             this.tableLayoutPanel1.Controls.Add(this.dateTimePicker, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.dateTimePicker1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnFindAppointments, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblStartDate, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblEndDate, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnFindAppointments, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnReset, 2, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 16);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
@@ -63,18 +61,29 @@
             this.dateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.dateTimePicker.Location = new System.Drawing.Point(3, 32);
             this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(290, 26);
+            this.dateTimePicker.Size = new System.Drawing.Size(224, 26);
             this.dateTimePicker.TabIndex = 0;
             // 
             // btnFindAppointments
             // 
             this.btnFindAppointments.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnFindAppointments.Location = new System.Drawing.Point(639, 32);
+            this.btnFindAppointments.Location = new System.Drawing.Point(233, 32);
             this.btnFindAppointments.Name = "btnFindAppointments";
             this.btnFindAppointments.Size = new System.Drawing.Size(190, 31);
             this.btnFindAppointments.TabIndex = 1;
             this.btnFindAppointments.Text = "Find Appointments";
             this.btnFindAppointments.UseVisualStyleBackColor = true;
+            this.btnFindAppointments.Click += new System.EventHandler(this.btnFindAppointments_Click);
+            // 
+            // lblStartDate
+            // 
+            this.lblStartDate.AutoSize = true;
+            this.lblStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblStartDate.Location = new System.Drawing.Point(3, 0);
+            this.lblStartDate.Name = "lblStartDate";
+            this.lblStartDate.Size = new System.Drawing.Size(97, 20);
+            this.lblStartDate.TabIndex = 3;
+            this.lblStartDate.Text = "Select Date:";
             // 
             // dgvDisplayAppointments
             // 
@@ -86,33 +95,16 @@
             this.dgvDisplayAppointments.Size = new System.Drawing.Size(852, 383);
             this.dgvDisplayAppointments.TabIndex = 5;
             // 
-            // dateTimePicker1
+            // btnReset
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.dateTimePicker1.Location = new System.Drawing.Point(299, 32);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(300, 26);
-            this.dateTimePicker1.TabIndex = 2;
-            // 
-            // lblStartDate
-            // 
-            this.lblStartDate.AutoSize = true;
-            this.lblStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblStartDate.Location = new System.Drawing.Point(3, 0);
-            this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(83, 20);
-            this.lblStartDate.TabIndex = 3;
-            this.lblStartDate.Text = "Start Date";
-            // 
-            // lblEndDate
-            // 
-            this.lblEndDate.AutoSize = true;
-            this.lblEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblEndDate.Location = new System.Drawing.Point(299, 0);
-            this.lblEndDate.Name = "lblEndDate";
-            this.lblEndDate.Size = new System.Drawing.Size(77, 20);
-            this.lblEndDate.TabIndex = 4;
-            this.lblEndDate.Text = "End Date";
+            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnReset.Location = new System.Drawing.Point(482, 32);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(190, 31);
+            this.btnReset.TabIndex = 4;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // CalendarView
             // 
@@ -123,6 +115,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "CalendarView";
             this.Text = "Calendar View";
+            this.Load += new System.EventHandler(this.CalendarView_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDisplayAppointments)).EndInit();
@@ -136,8 +129,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker;
         private System.Windows.Forms.Button btnFindAppointments;
         private System.Windows.Forms.DataGridView dgvDisplayAppointments;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label lblStartDate;
-        private System.Windows.Forms.Label lblEndDate;
+        private System.Windows.Forms.Button btnReset;
     }
 }
