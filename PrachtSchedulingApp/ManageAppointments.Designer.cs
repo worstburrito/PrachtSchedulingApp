@@ -43,6 +43,7 @@
             this.btnDeleteRecord.TabIndex = 7;
             this.btnDeleteRecord.Text = "Delete Appointment";
             this.btnDeleteRecord.UseVisualStyleBackColor = true;
+            this.btnDeleteRecord.Click += new System.EventHandler(this.btnDeleteRecord_Click);
             // 
             // btnUpdateRecord
             // 
@@ -52,6 +53,7 @@
             this.btnUpdateRecord.TabIndex = 6;
             this.btnUpdateRecord.Text = "Update Appointment";
             this.btnUpdateRecord.UseVisualStyleBackColor = true;
+            this.btnUpdateRecord.Click += new System.EventHandler(this.btnUpdateRecord_Click);
             // 
             // btnAdd
             // 
@@ -61,6 +63,7 @@
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "Add New Appointment";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // dgvManageAppointments
             // 

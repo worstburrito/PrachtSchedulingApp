@@ -60,5 +60,40 @@ namespace PrachtSchedulingApp
                 calendarView.Show();
             }
         }
+
+        private void addAppointment_Click(object sender, EventArgs e)
+        {
+            if (!Utils.FormIsOpen("AddAppointment"))
+            {
+                var addAppointment = new AddAppointment();
+                addAppointment.MdiParent = this;
+                addAppointment.Show();
+            }
+        }
+
+        private void addCustomerRecords_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void Report1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void Report2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void Report3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void Report4_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

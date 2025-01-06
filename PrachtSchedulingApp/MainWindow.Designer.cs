@@ -81,6 +81,7 @@
             this.addCustomerRecords.Name = "addCustomerRecords";
             this.addCustomerRecords.Size = new System.Drawing.Size(199, 22);
             this.addCustomerRecords.Text = "Add Customer Record";
+            this.addCustomerRecords.Click += new System.EventHandler(this.addCustomerRecords_Click);
             // 
             // manageAppointments
             // 
@@ -103,6 +104,7 @@
             this.addAppointment.Name = "addAppointment";
             this.addAppointment.Size = new System.Drawing.Size(195, 22);
             this.addAppointment.Text = "Add Appointment";
+            this.addAppointment.Click += new System.EventHandler(this.addAppointment_Click);
             // 
             // viewSchedule
             // 
@@ -127,24 +129,28 @@
             this.Report1.Name = "Report1";
             this.Report1.Size = new System.Drawing.Size(232, 22);
             this.Report1.Text = "Appointment Types by Month";
+            this.Report1.Click += new System.EventHandler(this.Report1_Click);
             // 
             // Report2
             // 
             this.Report2.Name = "Report2";
             this.Report2.Size = new System.Drawing.Size(232, 22);
             this.Report2.Text = "User Schedules";
+            this.Report2.Click += new System.EventHandler(this.Report2_Click);
             // 
             // Report3
             // 
             this.Report3.Name = "Report3";
             this.Report3.Size = new System.Drawing.Size(232, 22);
             this.Report3.Text = "Report 3";
+            this.Report3.Click += new System.EventHandler(this.Report3_Click);
             // 
             // Report4
             // 
             this.Report4.Name = "Report4";
             this.Report4.Size = new System.Drawing.Size(232, 22);
             this.Report4.Text = "Login History";
+            this.Report4.Click += new System.EventHandler(this.Report4_Click);
             // 
             // mainStatus
             // 

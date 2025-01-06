@@ -53,6 +53,7 @@
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add New Record";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnUpdateRecord
             // 
@@ -62,6 +63,7 @@
             this.btnUpdateRecord.TabIndex = 2;
             this.btnUpdateRecord.Text = "Update Record";
             this.btnUpdateRecord.UseVisualStyleBackColor = true;
+            this.btnUpdateRecord.Click += new System.EventHandler(this.btnUpdateRecord_Click);
             // 
             // btnDeleteRecord
             // 
@@ -71,6 +73,7 @@
             this.btnDeleteRecord.TabIndex = 3;
             this.btnDeleteRecord.Text = "Delete Record";
             this.btnDeleteRecord.UseVisualStyleBackColor = true;
+            this.btnDeleteRecord.Click += new System.EventHandler(this.btnDeleteRecord_Click);
             // 
             // ManageCustomerRecords
             // 
