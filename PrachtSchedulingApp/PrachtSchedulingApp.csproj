@@ -104,6 +104,19 @@
     <Compile Include="CalendarView.Designer.cs">
       <DependentUpon>CalendarView.cs</DependentUpon>
     </Compile>
+    <Compile Include="CRUDAppointment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRUDAppointment.Designer.cs">
+      <DependentUpon>CRUDAppointment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CRUDCustomerRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRUDCustomerRecord.Designer.cs">
+      <DependentUpon>CRUDCustomerRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Database\DBConnection.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +146,12 @@
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="CalendarView.resx">
       <DependentUpon>CalendarView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRUDAppointment.resx">
+      <DependentUpon>CRUDAppointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRUDCustomerRecord.resx">
+      <DependentUpon>CRUDCustomerRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

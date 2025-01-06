@@ -40,9 +40,9 @@
             this.Report1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Report2 = new System.Windows.Forms.ToolStripMenuItem();
             this.Report3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.Report4 = new System.Windows.Forms.ToolStripMenuItem();
             this.mainStatus = new System.Windows.Forms.StatusStrip();
             this.lblMainStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.Report4 = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.mainStatus.SuspendLayout();
             this.SuspendLayout();
@@ -140,6 +140,12 @@
             this.Report3.Size = new System.Drawing.Size(232, 22);
             this.Report3.Text = "Report 3";
             // 
+            // Report4
+            // 
+            this.Report4.Name = "Report4";
+            this.Report4.Size = new System.Drawing.Size(232, 22);
+            this.Report4.Text = "Login History";
+            // 
             // mainStatus
             // 
             this.mainStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -155,12 +161,6 @@
             this.lblMainStatus.Name = "lblMainStatus";
             this.lblMainStatus.Size = new System.Drawing.Size(93, 17);
             this.lblMainStatus.Text = "Placeholder Text";
-            // 
-            // Report4
-            // 
-            this.Report4.Name = "Report4";
-            this.Report4.Size = new System.Drawing.Size(232, 22);
-            this.Report4.Text = "Login History";
             // 
             // MainWindow
             // 

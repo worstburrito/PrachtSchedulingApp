@@ -31,8 +31,8 @@
             this.btnDeleteRecord = new System.Windows.Forms.Button();
             this.btnUpdateRecord = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.dgvManageCustomerRecords = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvManageCustomerRecords)).BeginInit();
+            this.dgvManageAppointments = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvManageAppointments)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDeleteRecord
@@ -62,15 +62,15 @@
             this.btnAdd.Text = "Add New Appointment";
             this.btnAdd.UseVisualStyleBackColor = true;
             // 
-            // dgvManageCustomerRecords
+            // dgvManageAppointments
             // 
-            this.dgvManageCustomerRecords.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvManageCustomerRecords.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dgvManageCustomerRecords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvManageCustomerRecords.Location = new System.Drawing.Point(12, 12);
-            this.dgvManageCustomerRecords.Name = "dgvManageCustomerRecords";
-            this.dgvManageCustomerRecords.Size = new System.Drawing.Size(776, 366);
-            this.dgvManageCustomerRecords.TabIndex = 4;
+            this.dgvManageAppointments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvManageAppointments.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgvManageAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvManageAppointments.Location = new System.Drawing.Point(12, 12);
+            this.dgvManageAppointments.Name = "dgvManageAppointments";
+            this.dgvManageAppointments.Size = new System.Drawing.Size(776, 366);
+            this.dgvManageAppointments.TabIndex = 4;
             // 
             // ManageAppointments
             // 
@@ -80,10 +80,11 @@
             this.Controls.Add(this.btnDeleteRecord);
             this.Controls.Add(this.btnUpdateRecord);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.dgvManageCustomerRecords);
+            this.Controls.Add(this.dgvManageAppointments);
             this.Name = "ManageAppointments";
             this.Text = "Manage Appointments";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvManageCustomerRecords)).EndInit();
+            this.Load += new System.EventHandler(this.ManageAppointments_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvManageAppointments)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -93,6 +94,6 @@
         private System.Windows.Forms.Button btnDeleteRecord;
         private System.Windows.Forms.Button btnUpdateRecord;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.DataGridView dgvManageCustomerRecords;
+        private System.Windows.Forms.DataGridView dgvManageAppointments;
     }
 }

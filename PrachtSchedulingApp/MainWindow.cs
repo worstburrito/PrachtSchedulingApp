@@ -23,36 +23,7 @@ namespace PrachtSchedulingApp
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            // Read the connection string from app.config
-            string connectionString = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
-
-            try
-            {
-                // Create a connection object
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    // Open the connection
-                    connection.Open();
-                    MessageBox.Show($"Connection to the database was successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Example query
-                    string query = "SELECT * FROM appointment;";
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
-                    {
-                        using (MySqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                MessageBox.Show($"Row: {reader[0]}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            
         }
 
         private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)

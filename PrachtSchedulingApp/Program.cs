@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PrachtSchedulingApp.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,10 @@ namespace PrachtSchedulingApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            DBConnection.startConnection();
             Application.Run(new Login());
+            DBConnection.closeConnection();
         }
     }
 }
