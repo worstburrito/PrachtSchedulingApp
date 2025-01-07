@@ -38,7 +38,7 @@
             // btnAdd
             // 
             this.btnAdd.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnAdd.Location = new System.Drawing.Point(0, 374);
+            this.btnAdd.Location = new System.Drawing.Point(0, 300);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(734, 37);
             this.btnAdd.TabIndex = 5;
@@ -71,7 +71,7 @@
             // btnDeactive
             // 
             this.btnDeactive.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnDeactive.Location = new System.Drawing.Point(0, 300);
+            this.btnDeactive.Location = new System.Drawing.Point(0, 374);
             this.btnDeactive.Name = "btnDeactive";
             this.btnDeactive.Size = new System.Drawing.Size(734, 37);
             this.btnDeactive.TabIndex = 9;
@@ -83,13 +83,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(734, 411);
-            this.Controls.Add(this.btnDeactive);
-            this.Controls.Add(this.btnActivate);
             this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btnActivate);
+            this.Controls.Add(this.btnDeactive);
             this.Controls.Add(this.dgvManageUsers);
             this.Name = "ManageUsers";
             this.Text = "Manage Users";

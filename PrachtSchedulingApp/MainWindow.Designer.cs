@@ -59,7 +59,8 @@
             this.adminToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(1095, 24);
+            this.mainMenu.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
+            this.mainMenu.Size = new System.Drawing.Size(730, 24);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -174,9 +175,10 @@
             // 
             this.userStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblUserStatus});
-            this.userStatus.Location = new System.Drawing.Point(0, 715);
+            this.userStatus.Location = new System.Drawing.Point(0, 457);
             this.userStatus.Name = "userStatus";
-            this.userStatus.Size = new System.Drawing.Size(1095, 22);
+            this.userStatus.Padding = new System.Windows.Forms.Padding(1, 0, 9, 0);
+            this.userStatus.Size = new System.Drawing.Size(730, 22);
             this.userStatus.TabIndex = 3;
             this.userStatus.Text = "statusStrip1";
             // 
@@ -188,16 +190,15 @@
             // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1095, 737);
+            this.ClientSize = new System.Drawing.Size(730, 479);
             this.Controls.Add(this.userStatus);
             this.Controls.Add(this.mainMenu);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mainMenu;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pracht Scheduling Application";

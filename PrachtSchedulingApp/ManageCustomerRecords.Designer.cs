@@ -49,7 +49,7 @@
             // btnAdd
             // 
             this.btnAdd.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnAdd.Location = new System.Drawing.Point(0, 374);
+            this.btnAdd.Location = new System.Drawing.Point(0, 300);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(734, 37);
             this.btnAdd.TabIndex = 1;
@@ -71,7 +71,7 @@
             // btnDeleteRecord
             // 
             this.btnDeleteRecord.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnDeleteRecord.Location = new System.Drawing.Point(0, 300);
+            this.btnDeleteRecord.Location = new System.Drawing.Point(0, 374);
             this.btnDeleteRecord.Name = "btnDeleteRecord";
             this.btnDeleteRecord.Size = new System.Drawing.Size(734, 37);
             this.btnDeleteRecord.TabIndex = 3;
@@ -83,11 +83,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(734, 411);
-            this.Controls.Add(this.btnDeleteRecord);
-            this.Controls.Add(this.btnUpdateRecord);
             this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btnUpdateRecord);
+            this.Controls.Add(this.btnDeleteRecord);
             this.Controls.Add(this.dgvManageCustomerRecords);
             this.Name = "ManageCustomerRecords";
             this.Text = "Manage Customer Records";
