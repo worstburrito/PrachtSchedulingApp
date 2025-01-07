@@ -93,7 +93,27 @@ namespace PrachtSchedulingApp
 
         private void Report4_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (!Utils.FormIsOpen("AddAppointment"))
+            {
+                var loginHistoryReport = new LoginHistoryReport();
+                loginHistoryReport.MdiParent = this;
+                loginHistoryReport.Show();
+            }
+        }
+
+        private void lblMainStatus_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void LoginHistory_Click(object sender, EventArgs e)
+        {
+            if (!Utils.FormIsOpen("AddAppointment"))
+            {
+                var loginHistoryReport = new LoginHistoryReport();
+                loginHistoryReport.MdiParent = this;
+                loginHistoryReport.Show();
+            }
         }
     }
 }

@@ -41,6 +41,9 @@
             this.Report2 = new System.Windows.Forms.ToolStripMenuItem();
             this.Report3 = new System.Windows.Forms.ToolStripMenuItem();
             this.Report4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ManageUsers = new System.Windows.Forms.ToolStripMenuItem();
+            this.LoginHistory = new System.Windows.Forms.ToolStripMenuItem();
             this.mainStatus = new System.Windows.Forms.StatusStrip();
             this.lblMainStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainMenu.SuspendLayout();
@@ -53,7 +56,8 @@
             this.manageCustomerRecords,
             this.manageAppointments,
             this.viewSchedule,
-            this.runReport});
+            this.runReport,
+            this.adminToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Size = new System.Drawing.Size(1095, 24);
@@ -152,6 +156,28 @@
             this.Report4.Text = "Login History";
             this.Report4.Click += new System.EventHandler(this.Report4_Click);
             // 
+            // adminToolStripMenuItem
+            // 
+            this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ManageUsers,
+            this.LoginHistory});
+            this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
+            this.adminToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.adminToolStripMenuItem.Text = "Admin";
+            // 
+            // ManageUsers
+            // 
+            this.ManageUsers.Name = "ManageUsers";
+            this.ManageUsers.Size = new System.Drawing.Size(180, 22);
+            this.ManageUsers.Text = "Manage Users";
+            // 
+            // LoginHistory
+            // 
+            this.LoginHistory.Name = "LoginHistory";
+            this.LoginHistory.Size = new System.Drawing.Size(180, 22);
+            this.LoginHistory.Text = "Login History";
+            this.LoginHistory.Click += new System.EventHandler(this.LoginHistory_Click);
+            // 
             // mainStatus
             // 
             this.mainStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -167,6 +193,7 @@
             this.lblMainStatus.Name = "lblMainStatus";
             this.lblMainStatus.Size = new System.Drawing.Size(93, 17);
             this.lblMainStatus.Text = "Placeholder Text";
+            this.lblMainStatus.Click += new System.EventHandler(this.lblMainStatus_Click);
             // 
             // MainWindow
             // 
@@ -211,6 +238,9 @@
         private System.Windows.Forms.ToolStripMenuItem Report4;
         private System.Windows.Forms.StatusStrip mainStatus;
         private System.Windows.Forms.ToolStripStatusLabel lblMainStatus;
+        private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ManageUsers;
+        private System.Windows.Forms.ToolStripMenuItem LoginHistory;
     }
 }
 
