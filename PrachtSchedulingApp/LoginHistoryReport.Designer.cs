@@ -37,7 +37,7 @@
             this.btnRunReport.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnRunReport.Location = new System.Drawing.Point(0, 0);
             this.btnRunReport.Name = "btnRunReport";
-            this.btnRunReport.Size = new System.Drawing.Size(582, 37);
+            this.btnRunReport.Size = new System.Drawing.Size(584, 37);
             this.btnRunReport.TabIndex = 0;
             this.btnRunReport.Text = "Run Report";
             this.btnRunReport.UseVisualStyleBackColor = true;
@@ -48,7 +48,7 @@
             this.rtbReport.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.rtbReport.Location = new System.Drawing.Point(0, 63);
             this.rtbReport.Name = "rtbReport";
-            this.rtbReport.Size = new System.Drawing.Size(582, 298);
+            this.rtbReport.Size = new System.Drawing.Size(584, 298);
             this.rtbReport.TabIndex = 1;
             this.rtbReport.Text = "";
             // 
@@ -56,9 +56,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(582, 361);
+            this.ClientSize = new System.Drawing.Size(584, 361);
             this.Controls.Add(this.rtbReport);
             this.Controls.Add(this.btnRunReport);
             this.Name = "LoginHistoryReport";
