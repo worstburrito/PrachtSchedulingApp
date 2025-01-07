@@ -40,14 +40,10 @@
             this.Report1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Report2 = new System.Windows.Forms.ToolStripMenuItem();
             this.Report3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.Report4 = new System.Windows.Forms.ToolStripMenuItem();
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ManageUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.LoginHistory = new System.Windows.Forms.ToolStripMenuItem();
-            this.mainStatus = new System.Windows.Forms.StatusStrip();
-            this.lblMainStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainMenu.SuspendLayout();
-            this.mainStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -122,8 +118,7 @@
             this.runReport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Report1,
             this.Report2,
-            this.Report3,
-            this.Report4});
+            this.Report3});
             this.runReport.Name = "runReport";
             this.runReport.Size = new System.Drawing.Size(78, 20);
             this.runReport.Text = "Run Report";
@@ -149,13 +144,6 @@
             this.Report3.Text = "Report 3";
             this.Report3.Click += new System.EventHandler(this.Report3_Click);
             // 
-            // Report4
-            // 
-            this.Report4.Name = "Report4";
-            this.Report4.Size = new System.Drawing.Size(232, 22);
-            this.Report4.Text = "Login History";
-            this.Report4.Click += new System.EventHandler(this.Report4_Click);
-            // 
             // adminToolStripMenuItem
             // 
             this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -168,39 +156,22 @@
             // ManageUsers
             // 
             this.ManageUsers.Name = "ManageUsers";
-            this.ManageUsers.Size = new System.Drawing.Size(180, 22);
+            this.ManageUsers.Size = new System.Drawing.Size(148, 22);
             this.ManageUsers.Text = "Manage Users";
+            this.ManageUsers.Click += new System.EventHandler(this.ManageUsers_Click);
             // 
             // LoginHistory
             // 
             this.LoginHistory.Name = "LoginHistory";
-            this.LoginHistory.Size = new System.Drawing.Size(180, 22);
+            this.LoginHistory.Size = new System.Drawing.Size(148, 22);
             this.LoginHistory.Text = "Login History";
             this.LoginHistory.Click += new System.EventHandler(this.LoginHistory_Click);
-            // 
-            // mainStatus
-            // 
-            this.mainStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblMainStatus});
-            this.mainStatus.Location = new System.Drawing.Point(0, 715);
-            this.mainStatus.Name = "mainStatus";
-            this.mainStatus.Size = new System.Drawing.Size(1095, 22);
-            this.mainStatus.TabIndex = 2;
-            this.mainStatus.Text = "statusStrip1";
-            // 
-            // lblMainStatus
-            // 
-            this.lblMainStatus.Name = "lblMainStatus";
-            this.lblMainStatus.Size = new System.Drawing.Size(93, 17);
-            this.lblMainStatus.Text = "Placeholder Text";
-            this.lblMainStatus.Click += new System.EventHandler(this.lblMainStatus_Click);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1095, 737);
-            this.Controls.Add(this.mainStatus);
             this.Controls.Add(this.mainMenu);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.IsMdiContainer = true;
@@ -214,8 +185,6 @@
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
-            this.mainStatus.ResumeLayout(false);
-            this.mainStatus.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,9 +204,6 @@
         private System.Windows.Forms.ToolStripMenuItem Report1;
         private System.Windows.Forms.ToolStripMenuItem Report2;
         private System.Windows.Forms.ToolStripMenuItem Report3;
-        private System.Windows.Forms.ToolStripMenuItem Report4;
-        private System.Windows.Forms.StatusStrip mainStatus;
-        private System.Windows.Forms.ToolStripStatusLabel lblMainStatus;
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ManageUsers;
         private System.Windows.Forms.ToolStripMenuItem LoginHistory;

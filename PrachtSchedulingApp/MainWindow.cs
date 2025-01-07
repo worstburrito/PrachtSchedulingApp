@@ -115,5 +115,10 @@ namespace PrachtSchedulingApp
                 loginHistoryReport.Show();
             }
         }
+
+        private void ManageUsers_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

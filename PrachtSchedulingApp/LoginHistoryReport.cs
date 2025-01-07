@@ -20,15 +20,19 @@ namespace PrachtSchedulingApp
 
         private void btnRunReport_Click(object sender, EventArgs e)
         {
-            string logPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Login_History.txt");
+            // Get the root project directory
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string projectRoot = Directory.GetParent(baseDirectory)?.Parent?.Parent?.FullName;
 
-            // Try to locate the file in the project root if it's not in the bin directory
-            if (!File.Exists(logPath))
+            // Ensure projectRoot is not null
+            if (string.IsNullOrEmpty(projectRoot))
             {
-                string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                string projectRoot = Directory.GetParent(baseDirectory)?.Parent?.Parent?.FullName;
-                logPath = Path.Combine(projectRoot, "Login_History.txt");
+                MessageBox.Show("Unable to determine the project root directory.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            // Construct the correct log file path in the project root directory
+            string logPath = Path.Combine(projectRoot, "Login_History.txt");
 
             try
             {
@@ -54,5 +58,6 @@ namespace PrachtSchedulingApp
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }

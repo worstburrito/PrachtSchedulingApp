@@ -152,18 +152,15 @@ namespace PrachtSchedulingApp
 
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string status = isSuccess ? "Success" : "Failure";
-            string logEntry = $"{timestamp} - Username: {username} - Status: {status}{Environment.NewLine}";
+            string logEntry = $"{timestamp} - Username: {username} - Status: {status}";
 
             try
             {
-                // Create the file if it doesn't exist
-                if (!File.Exists(logPath))
+                // Write the log entry using StreamWriter to prevent file locking issues
+                using (StreamWriter writer = new StreamWriter(logPath, true))
                 {
-                    File.Create(logPath).Close(); // Close after creation
+                    writer.WriteLine(logEntry);
                 }
-
-                // Append the log entry
-                File.AppendAllText(logPath, logEntry);
 
                 // Debug: Confirm write success
                 MessageBox.Show($"Log entry written successfully to: {logPath}", "Debug Info");
@@ -173,6 +170,7 @@ namespace PrachtSchedulingApp
                 MessageBox.Show($"Unable to write to log file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void Login_Load(object sender, EventArgs e)
         {
