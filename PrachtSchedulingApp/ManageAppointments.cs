@@ -34,20 +34,20 @@ namespace PrachtSchedulingApp
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
 
-                // DataTable apptsUTC = new DataTable();
+                DataTable apptsUTC = new DataTable();
                 DataTable apptsLocal = new DataTable();
-                // adapter.Fill(apptsUTC);
+                adapter.Fill(apptsUTC);
                 adapter.Fill(apptsLocal);
 
                 // Convert UTC to Local Time
-                //for (int i = 0; i < apptsUTC.Rows.Count; i++)
-                //{
-                //    DateTime x = (DateTime)apptsUTC.Rows[i]["start"];
-                //    apptsLocal.Rows[i]["start"] = x.ToLocalTime();
+                for (int i = 0; i < apptsUTC.Rows.Count; i++)
+                {
+                    DateTime x = (DateTime)apptsUTC.Rows[i]["start"];
+                    apptsLocal.Rows[i]["start"] = x.ToLocalTime();
 
-                //    DateTime y = (DateTime)apptsUTC.Rows[i]["end"];
-                //    apptsLocal.Rows[i]["end"] = y.ToLocalTime();
-                //}
+                    DateTime y = (DateTime)apptsUTC.Rows[i]["end"];
+                    apptsLocal.Rows[i]["end"] = y.ToLocalTime();
+                }
 
                 // Set DataSource
                 dgvManageAppointments.DataSource = apptsLocal;

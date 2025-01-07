@@ -25,7 +25,7 @@ namespace PrachtSchedulingApp
 
         }
 
-        private bool ValidateLogin(string username, string password)
+        private (bool isValid, int userId) ValidateLogin(string username, string password)
         {
             try
             {
@@ -35,8 +35,8 @@ namespace PrachtSchedulingApp
                 {
                     con.Open();
 
-                    // Query to validate username, password, and active status
-                    string query = @"SELECT COUNT(*) 
+                    // Query to validate username, password, and active status, and also retrieve UserId
+                    string query = @"SELECT userId 
                              FROM user 
                              WHERE userName = @username 
                              AND password = @password 
@@ -48,18 +48,30 @@ namespace PrachtSchedulingApp
                         cmd.Parameters.AddWithValue("@username", username);
                         cmd.Parameters.AddWithValue("@password", password);
 
-                        // Execute the query and check if a matching user exists
-                        int userCount = Convert.ToInt32(cmd.ExecuteScalar());
-                        return userCount > 0;
+                        // Execute the query and get the results
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int userId = reader.GetInt32(0); // Retrieve the userId from the first column
+                                return (true, userId); // Login is valid, return userId
+                            }
+                            else
+                            {
+                                return (false, 0); // Login failed, return 0 for UserId
+                            }
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                return (false, 0);
             }
         }
+
+
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -69,10 +81,17 @@ namespace PrachtSchedulingApp
             // Get user location
             string location = GetUserLocation();
 
-            if (ValidateLogin(username, password))
+            // Validate login and get userId
+            var (isValid, userId) = ValidateLogin(username, password);
+
+            if (isValid)
             {
                 // Log success
                 LogLoginHistory(username, true);
+
+                // Set the current user details
+                CurrentUser.Username = username;
+                CurrentUser.UserId = userId;
 
                 // Translate success message
                 string successMessage = TranslateMessage("Login successful!", location);
@@ -93,6 +112,7 @@ namespace PrachtSchedulingApp
                 MessageBox.Show(errorMessage, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
         private string GetUserLocation()
         {
@@ -169,6 +189,12 @@ namespace PrachtSchedulingApp
             {
                 MessageBox.Show($"Unable to write to log file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public static class CurrentUser
+        {
+            public static string Username { get; set;}
+            public static int UserId { get; set;}
         }
 
 

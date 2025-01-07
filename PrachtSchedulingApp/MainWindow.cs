@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PrachtSchedulingApp.Login;
 
 namespace PrachtSchedulingApp
 {
@@ -23,7 +24,8 @@ namespace PrachtSchedulingApp
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            
+            string loggedInUser = CurrentUser.Username;
+            lblUserStatus.Text = $"Currently logged in as: {loggedInUser}";
         }
 
         private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
@@ -118,7 +120,12 @@ namespace PrachtSchedulingApp
 
         private void ManageUsers_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (!Utils.FormIsOpen("ManageUsers"))
+            {
+                var manageUsers = new ManageUsers();
+                manageUsers.MdiParent = this;
+                manageUsers.Show();
+            }
         }
     }
 }

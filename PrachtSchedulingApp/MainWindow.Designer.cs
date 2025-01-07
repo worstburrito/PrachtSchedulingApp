@@ -43,7 +43,10 @@
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ManageUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.LoginHistory = new System.Windows.Forms.ToolStripMenuItem();
+            this.userStatus = new System.Windows.Forms.StatusStrip();
+            this.lblUserStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainMenu.SuspendLayout();
+            this.userStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -167,11 +170,28 @@
             this.LoginHistory.Text = "Login History";
             this.LoginHistory.Click += new System.EventHandler(this.LoginHistory_Click);
             // 
+            // userStatus
+            // 
+            this.userStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblUserStatus});
+            this.userStatus.Location = new System.Drawing.Point(0, 715);
+            this.userStatus.Name = "userStatus";
+            this.userStatus.Size = new System.Drawing.Size(1095, 22);
+            this.userStatus.TabIndex = 3;
+            this.userStatus.Text = "statusStrip1";
+            // 
+            // lblUserStatus
+            // 
+            this.lblUserStatus.Name = "lblUserStatus";
+            this.lblUserStatus.Size = new System.Drawing.Size(93, 17);
+            this.lblUserStatus.Text = "Placeholder Text";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1095, 737);
+            this.Controls.Add(this.userStatus);
             this.Controls.Add(this.mainMenu);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.IsMdiContainer = true;
@@ -185,6 +205,8 @@
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
+            this.userStatus.ResumeLayout(false);
+            this.userStatus.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,6 +229,8 @@
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ManageUsers;
         private System.Windows.Forms.ToolStripMenuItem LoginHistory;
+        private System.Windows.Forms.StatusStrip userStatus;
+        private System.Windows.Forms.ToolStripStatusLabel lblUserStatus;
     }
 }
 
