@@ -37,9 +37,10 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(187, 393);
+            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnAdd.Location = new System.Drawing.Point(0, 374);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(138, 37);
+            this.btnAdd.Size = new System.Drawing.Size(734, 37);
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "Add New User";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -50,16 +51,18 @@
             this.dgvManageUsers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvManageUsers.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvManageUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvManageUsers.Location = new System.Drawing.Point(12, 21);
+            this.dgvManageUsers.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvManageUsers.Location = new System.Drawing.Point(0, 0);
             this.dgvManageUsers.Name = "dgvManageUsers";
-            this.dgvManageUsers.Size = new System.Drawing.Size(776, 366);
+            this.dgvManageUsers.Size = new System.Drawing.Size(734, 300);
             this.dgvManageUsers.TabIndex = 4;
             // 
             // btnActivate
             // 
-            this.btnActivate.Location = new System.Drawing.Point(331, 393);
+            this.btnActivate.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnActivate.Location = new System.Drawing.Point(0, 337);
             this.btnActivate.Name = "btnActivate";
-            this.btnActivate.Size = new System.Drawing.Size(138, 37);
+            this.btnActivate.Size = new System.Drawing.Size(734, 37);
             this.btnActivate.TabIndex = 8;
             this.btnActivate.Text = "Activate User";
             this.btnActivate.UseVisualStyleBackColor = true;
@@ -67,9 +70,10 @@
             // 
             // btnDeactive
             // 
-            this.btnDeactive.Location = new System.Drawing.Point(475, 393);
+            this.btnDeactive.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnDeactive.Location = new System.Drawing.Point(0, 300);
             this.btnDeactive.Name = "btnDeactive";
-            this.btnDeactive.Size = new System.Drawing.Size(138, 37);
+            this.btnDeactive.Size = new System.Drawing.Size(734, 37);
             this.btnDeactive.TabIndex = 9;
             this.btnDeactive.Text = "Deactivate User";
             this.btnDeactive.UseVisualStyleBackColor = true;
@@ -79,7 +83,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(734, 411);
             this.Controls.Add(this.btnDeactive);
             this.Controls.Add(this.btnActivate);
             this.Controls.Add(this.btnAdd);

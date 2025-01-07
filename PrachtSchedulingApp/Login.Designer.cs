@@ -46,13 +46,14 @@
             this.tableLayoutPanel1.Controls.Add(this.lblPassword, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtUsername, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtPassword, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(16, 18);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(427, 164);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(403, 94);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lblUsername
@@ -68,7 +69,7 @@
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(4, 82);
+            this.lblPassword.Location = new System.Drawing.Point(4, 47);
             this.lblPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(78, 20);
@@ -77,7 +78,7 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(125, 5);
+            this.txtUsername.Location = new System.Drawing.Point(118, 5);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(269, 26);
@@ -85,7 +86,7 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(125, 87);
+            this.txtPassword.Location = new System.Drawing.Point(118, 52);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
@@ -94,10 +95,11 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(16, 192);
+            this.btnLogin.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnLogin.Location = new System.Drawing.Point(0, 103);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(427, 36);
+            this.btnLogin.Size = new System.Drawing.Size(403, 36);
             this.btnLogin.TabIndex = 1;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -107,7 +109,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(459, 261);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(403, 139);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);

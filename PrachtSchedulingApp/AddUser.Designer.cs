@@ -39,9 +39,10 @@
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(198, 145);
+            this.btnSubmit.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnSubmit.Location = new System.Drawing.Point(0, 115);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(404, 23);
+            this.btnSubmit.Size = new System.Drawing.Size(399, 23);
             this.btnSubmit.TabIndex = 3;
             this.btnSubmit.Text = "Create User";
             this.btnSubmit.UseVisualStyleBackColor = true;
@@ -50,18 +51,19 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.25253F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 74.74747F));
             this.tableLayoutPanel1.Controls.Add(this.lblUsername, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblUser, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.cboUser, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtUsername, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(27, 34);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(747, 105);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(399, 105);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // lblUsername
@@ -85,14 +87,14 @@
             // cboUser
             // 
             this.cboUser.FormattingEnabled = true;
-            this.cboUser.Location = new System.Drawing.Point(376, 55);
+            this.cboUser.Location = new System.Drawing.Point(103, 55);
             this.cboUser.Name = "cboUser";
             this.cboUser.Size = new System.Drawing.Size(222, 21);
             this.cboUser.TabIndex = 11;
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(376, 3);
+            this.txtUsername.Location = new System.Drawing.Point(103, 3);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(222, 20);
             this.txtUsername.TabIndex = 20;
@@ -101,7 +103,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 190);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(399, 138);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "AddUser";

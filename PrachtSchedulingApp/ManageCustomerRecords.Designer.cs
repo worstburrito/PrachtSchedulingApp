@@ -40,16 +40,18 @@
             this.dgvManageCustomerRecords.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvManageCustomerRecords.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvManageCustomerRecords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvManageCustomerRecords.Location = new System.Drawing.Point(12, 12);
+            this.dgvManageCustomerRecords.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvManageCustomerRecords.Location = new System.Drawing.Point(0, 0);
             this.dgvManageCustomerRecords.Name = "dgvManageCustomerRecords";
-            this.dgvManageCustomerRecords.Size = new System.Drawing.Size(776, 366);
+            this.dgvManageCustomerRecords.Size = new System.Drawing.Size(734, 300);
             this.dgvManageCustomerRecords.TabIndex = 0;
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(156, 384);
+            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnAdd.Location = new System.Drawing.Point(0, 374);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(159, 37);
+            this.btnAdd.Size = new System.Drawing.Size(734, 37);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add New Record";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -57,9 +59,10 @@
             // 
             // btnUpdateRecord
             // 
-            this.btnUpdateRecord.Location = new System.Drawing.Point(321, 384);
+            this.btnUpdateRecord.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnUpdateRecord.Location = new System.Drawing.Point(0, 337);
             this.btnUpdateRecord.Name = "btnUpdateRecord";
-            this.btnUpdateRecord.Size = new System.Drawing.Size(159, 37);
+            this.btnUpdateRecord.Size = new System.Drawing.Size(734, 37);
             this.btnUpdateRecord.TabIndex = 2;
             this.btnUpdateRecord.Text = "Update Record";
             this.btnUpdateRecord.UseVisualStyleBackColor = true;
@@ -67,9 +70,10 @@
             // 
             // btnDeleteRecord
             // 
-            this.btnDeleteRecord.Location = new System.Drawing.Point(486, 384);
+            this.btnDeleteRecord.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnDeleteRecord.Location = new System.Drawing.Point(0, 300);
             this.btnDeleteRecord.Name = "btnDeleteRecord";
-            this.btnDeleteRecord.Size = new System.Drawing.Size(159, 37);
+            this.btnDeleteRecord.Size = new System.Drawing.Size(734, 37);
             this.btnDeleteRecord.TabIndex = 3;
             this.btnDeleteRecord.Text = "Delete Record";
             this.btnDeleteRecord.UseVisualStyleBackColor = true;
@@ -79,7 +83,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(734, 411);
             this.Controls.Add(this.btnDeleteRecord);
             this.Controls.Add(this.btnUpdateRecord);
             this.Controls.Add(this.btnAdd);
