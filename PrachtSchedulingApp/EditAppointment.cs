@@ -60,6 +60,14 @@ namespace PrachtSchedulingApp
             DateTime startEST = TimeZoneInfo.ConvertTime(start, estZone);
             DateTime endEST = TimeZoneInfo.ConvertTime(end, estZone);
 
+            // Check if end date is smaller than start date
+            if (startUTC > endUTC)
+            {
+                MessageBox.Show("End date cannot be earlier than start date.", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Check if appointment time is outside work hours
             if (startEST.DayOfWeek == DayOfWeek.Saturday || startEST.DayOfWeek == DayOfWeek.Sunday ||
                 startEST.Hour < 9 || endEST.Hour > 17)
             {
@@ -71,6 +79,13 @@ namespace PrachtSchedulingApp
             if (IsAppointmentOverlapping(startUTC, endUTC, customerId))
             {
                 MessageBox.Show("The selected time slot overlaps with an existing appointment. Please choose a different time.", "Overlapping Appointment", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Check if certain fields are missing data
+            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(location) || string.IsNullOrEmpty(contact) || string.IsNullOrEmpty(type))
+            {
+                MessageBox.Show("Title, Location, Contact and Type are required to save appointment.", "Missing Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

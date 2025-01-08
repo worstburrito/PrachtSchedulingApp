@@ -93,9 +93,9 @@ namespace PrachtSchedulingApp
                 CurrentUser.Username = username;
                 CurrentUser.UserId = userId;
 
-                // Translate success message
-                string successMessage = TranslateMessage("Login successful!", location);
-                MessageBox.Show(successMessage, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Translate success message - Turning this off for now. It's kind of annoying.
+                // string successMessage = TranslateMessage("Login successful!", location);
+                // MessageBox.Show(successMessage, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Proceed to the next step in your application
                 var mainWindow = new MainWindow(this);
@@ -183,7 +183,7 @@ namespace PrachtSchedulingApp
                 }
 
                 // Debug: Confirm write success
-                MessageBox.Show($"Log entry written successfully to: {logPath}", "Debug Info");
+                // MessageBox.Show($"Log entry written successfully to: {logPath}", "Debug Info");
             }
             catch (Exception ex)
             {
