@@ -21,66 +21,14 @@ namespace PrachtSchedulingApp
             InitializeComponent();
         }
 
-        public void PopulateGrid()
-        {
-            try
-            {
-                // Open connection string and write query
-                string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
-                MySqlConnection con = new MySqlConnection(connectionString);
-
-                con.Open();
-                string query = "SELECT * FROM appointment";
-                MySqlCommand cmd = new MySqlCommand(query, con);
-                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-
-                DataTable apptsUTC = new DataTable();
-                DataTable apptsLocal = new DataTable();
-                adapter.Fill(apptsUTC);
-                adapter.Fill(apptsLocal);
-
-                // Convert UTC to Local Time
-                for (int i = 0; i < apptsUTC.Rows.Count; i++)
-                {
-                    DateTime x = (DateTime)apptsUTC.Rows[i]["start"];
-                    apptsLocal.Rows[i]["start"] = x.ToLocalTime();
-
-                    DateTime y = (DateTime)apptsUTC.Rows[i]["end"];
-                    apptsLocal.Rows[i]["end"] = y.ToLocalTime();
-                }
-
-                // Set DataSource
-                dgvManageAppointments.DataSource = apptsLocal;
-
-
-                // Adjust column headers to preference
-                dgvManageAppointments.Columns["appointmentId"].Visible = false;
-                dgvManageAppointments.Columns["customerId"].Visible = false;
-                dgvManageAppointments.Columns["userId"].Visible = false;
-                dgvManageAppointments.Columns["title"].HeaderText = "Title";
-                dgvManageAppointments.Columns["description"].HeaderText = "Description";
-                dgvManageAppointments.Columns["location"].HeaderText = "Location";
-                dgvManageAppointments.Columns["contact"].HeaderText = "Contact";
-                dgvManageAppointments.Columns["type"].HeaderText = "Meeting Type";
-                dgvManageAppointments.Columns["url"].HeaderText = "URL";
-                dgvManageAppointments.Columns["start"].HeaderText = "Start";
-                dgvManageAppointments.Columns["end"].HeaderText = "End";
-                dgvManageAppointments.Columns["createDate"].Visible = false;
-                dgvManageAppointments.Columns["createdBy"].Visible = false;
-                dgvManageAppointments.Columns["lastUpdate"].Visible = false;
-                dgvManageAppointments.Columns["lastUpdateBy"].Visible = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        // Manage Appointments Form on Load
         private void ManageAppointments_Load(object sender, EventArgs e)
         {
-            //this.WindowState = FormWindowState.Maximized;
+            this.Width = Screen.PrimaryScreen.WorkingArea.Width;
             PopulateGrid();
         }
 
+        // Add Appointment Button - opens Add Appointment Form
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (!Utils.FormIsOpen("ManageCustomerRecords"))
@@ -91,12 +39,16 @@ namespace PrachtSchedulingApp
             }
         }
 
+        // Update Appointment Button - opens Edit Appointment Form
         private void btnUpdateRecord_Click(object sender, EventArgs e)
         {
+            // Ensure a row is selected
             if (dgvManageAppointments.SelectedRows.Count > 0)
             {
+                // Get the appointmentId of the selected row
                 int appointmentId = Convert.ToInt32(dgvManageAppointments.SelectedRows[0].Cells["appointmentId"].Value);
 
+                // Open Add Appointment window and pass over appointmentId
                 EditAppointment editAppointment = new EditAppointment(appointmentId, this);
                 editAppointment.MdiParent = this.MdiParent;
                 editAppointment.Show();
@@ -104,10 +56,12 @@ namespace PrachtSchedulingApp
             }
             else
             {
+                // Inform the user to select a row if none is selected
                 MessageBox.Show($"Please select a row to proceed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        // Delete Appointment Button - acts on Manage Appointments window
         private void btnDeleteRecord_Click(object sender, EventArgs e)
         {
             // Ensure a row is selected
@@ -163,6 +117,87 @@ namespace PrachtSchedulingApp
             {
                 // Inform the user to select a row if none is selected
                 MessageBox.Show("Please select an appointment to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        // Populate Grid with Appointments Database and join ids with corresponding databases
+        public void PopulateGrid()
+        {
+            try
+            {
+                // Open connection string and write query
+                string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
+                using (MySqlConnection con = new MySqlConnection(connectionString))
+                {
+                    con.Open();
+
+                    string query = @"
+                    SELECT 
+                        a.appointmentId,
+                        c.customerName AS CustomerName,
+                        u1.userName AS UserName,
+                        a.title,
+                        a.description,
+                        a.location,
+                        a.contact,
+                        a.type,
+                        a.url,
+                        a.start,
+                        a.end,
+                        a.createDate,
+                        u3.userName AS CreatedBy,
+                        a.lastUpdate,
+                        u2.userName AS LastUpdatedBy
+                    FROM 
+                        appointment a
+                    JOIN 
+                        customer c ON a.customerId = c.customerId
+                    JOIN 
+                        user u1 ON a.userId = u1.userId
+                    JOIN 
+                        user u2 ON a.lastUpdateBy = u2.userId
+                    JOIN 
+                        user u3 ON a.createdBy = u3.userId";
+
+                    MySqlCommand cmd = new MySqlCommand(query, con);
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+
+                    DataTable apptsUTC = new DataTable();
+                    DataTable apptsLocal = new DataTable();
+                    adapter.Fill(apptsUTC);
+                    apptsLocal = apptsUTC.Copy();
+
+                    // Convert UTC to Local Time
+                    foreach (DataRow row in apptsLocal.Rows)
+                    {
+                        row["start"] = ((DateTime)row["start"]).ToLocalTime();
+                        row["end"] = ((DateTime)row["end"]).ToLocalTime();
+                    }
+
+                    // Set DataSource
+                    dgvManageAppointments.DataSource = apptsLocal;
+
+                    // Adjust column headers to preference
+                    dgvManageAppointments.Columns["appointmentId"].Visible = false;
+                    dgvManageAppointments.Columns["CustomerName"].HeaderText = "Customer";
+                    dgvManageAppointments.Columns["UserName"].HeaderText = "User";
+                    dgvManageAppointments.Columns["title"].HeaderText = "Title";
+                    dgvManageAppointments.Columns["description"].HeaderText = "Description";
+                    dgvManageAppointments.Columns["location"].HeaderText = "Location";
+                    dgvManageAppointments.Columns["contact"].HeaderText = "Contact";
+                    dgvManageAppointments.Columns["type"].HeaderText = "Meeting Type";
+                    dgvManageAppointments.Columns["url"].HeaderText = "URL";
+                    dgvManageAppointments.Columns["start"].HeaderText = "Start";
+                    dgvManageAppointments.Columns["end"].HeaderText = "End";
+                    dgvManageAppointments.Columns["CreatedBy"].HeaderText = "Created By";
+                    dgvManageAppointments.Columns["createDate"].HeaderText = "Creation Date";
+                    dgvManageAppointments.Columns["LastUpdatedBy"].HeaderText = "Last Updated By";
+                    dgvManageAppointments.Columns["lastUpdate"].HeaderText = "Last Update";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

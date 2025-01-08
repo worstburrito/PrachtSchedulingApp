@@ -23,6 +23,7 @@ namespace PrachtSchedulingApp
             InitializeComponent();
             _manageAppointments = manageAppointments;
 
+            // this adds time selection to the datetimepickers
             dtpStart.CustomFormat = "MM/dd/yyyy hh:mm tt"; // 12-hour format
             dtpEnd.CustomFormat = "MM/dd/yyyy hh:mm tt"; // 12-hour format
         }
@@ -30,31 +31,6 @@ namespace PrachtSchedulingApp
         private void AddAppointment_Load(object sender, EventArgs e)
         {
             PopulateCustomerComboBox();
-        }
-
-        private void PopulateCustomerComboBox()
-        {
-            try
-            {
-                string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
-                MySqlConnection con = new MySqlConnection(connectionString);
-                con.Open();
-                string query = "SELECT customerId, customerName FROM customer WHERE active = 1";
-                MySqlCommand cmd = new MySqlCommand(query, con);
-                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-
-                DataTable customerComboBox = new DataTable();
-                adapter.Fill(customerComboBox);
-
-                cboCustomer.DisplayMember = "customerName";
-                cboCustomer.ValueMember = "customerId";
-
-                cboCustomer.DataSource = customerComboBox;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -102,10 +78,10 @@ namespace PrachtSchedulingApp
                 con.Open();
 
                 string query = @"
-        INSERT INTO appointment 
-        (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) 
-        VALUES 
-        (@customerId, @userId, @title, @description, @location, @contact, @type, @url, @start, @end, NOW(), @createdBy, NOW(), @userId);";
+                INSERT INTO appointment 
+                (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) 
+                VALUES 
+                (@customerId, @userId, @title, @description, @location, @contact, @type, @url, @start, @end, NOW(), @createdBy, NOW(), @userId);";
 
                 MySqlCommand cmd = new MySqlCommand(query, con);
 
@@ -140,12 +116,13 @@ namespace PrachtSchedulingApp
 
         private bool IsAppointmentOverlapping(DateTime start, DateTime end, int customerId)
         {
+            // this checks to see if the customer selected already has an appt on this day/time.
             string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
             string query = @"
-    SELECT COUNT(*) 
-    FROM appointment 
-    WHERE customerId = @customerId 
-    AND ((start <= @end AND end >= @start));";  // Overlapping condition
+            SELECT COUNT(*) 
+            FROM appointment 
+            WHERE customerId = @customerId 
+            AND ((start <= @end AND end >= @start));";  // Overlapping condition
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
@@ -173,7 +150,34 @@ namespace PrachtSchedulingApp
 
         private void btnAddNewCustomer_Click(object sender, EventArgs e)
         {
+            // Will come back and edit this when the Customer forms are done.
             MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void PopulateCustomerComboBox()
+        {
+            // This will populate the ComboBox that allows users to select a customer from the db.
+            try
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
+                MySqlConnection con = new MySqlConnection(connectionString);
+                con.Open();
+                string query = "SELECT customerId, customerName FROM customer WHERE active = 1";
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+
+                DataTable customerComboBox = new DataTable();
+                adapter.Fill(customerComboBox);
+
+                cboCustomer.DisplayMember = "customerName";
+                cboCustomer.ValueMember = "customerId";
+
+                cboCustomer.DataSource = customerComboBox;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 

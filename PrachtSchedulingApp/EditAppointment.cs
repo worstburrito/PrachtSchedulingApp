@@ -29,6 +29,113 @@ namespace PrachtSchedulingApp
             dtpEnd.CustomFormat = "MM/dd/yyyy hh:mm tt"; // 12-hour format
         }
 
+        // This will populate the customer combobox and load the appointment data by id
+        private void EditAppointment_Load(object sender, EventArgs e)
+        {
+            PopulateCustomerComboBox();
+            LoadAppointmentData();
+        }
+        
+        // Submit button 
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            // Gather updated values from the form
+            int customerId = (int)cboCustomer.SelectedValue;
+            int userId = CurrentUser.UserId;
+            string title = txtTitle.Text;
+            string description = txtDesc.Text;
+            string location = txtLocation.Text;
+            string contact = txtContact.Text;
+            string type = txtType.Text;
+            string url = txtURL.Text;
+            DateTime start = dtpStart.Value;  // Local time from DateTimePicker
+            DateTime end = dtpEnd.Value;      // Local time from DateTimePicker
+
+            // Convert start and end to UTC time for storage
+            DateTime startUTC = start.ToUniversalTime();
+            DateTime endUTC = end.ToUniversalTime();
+
+            // Check if appointment is within business hours (local time)
+            TimeZoneInfo estZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+            DateTime startEST = TimeZoneInfo.ConvertTime(start, estZone);
+            DateTime endEST = TimeZoneInfo.ConvertTime(end, estZone);
+
+            if (startEST.DayOfWeek == DayOfWeek.Saturday || startEST.DayOfWeek == DayOfWeek.Sunday ||
+                startEST.Hour < 9 || endEST.Hour > 17)
+            {
+                MessageBox.Show("Appointments must be scheduled between 9:00 AM and 5:00 PM, Monday–Friday, Eastern Standard Time.", "Invalid Time", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Check for overlapping appointments
+            if (IsAppointmentOverlapping(startUTC, endUTC, customerId))
+            {
+                MessageBox.Show("The selected time slot overlaps with an existing appointment. Please choose a different time.", "Overlapping Appointment", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Update appointment in the database (store UTC times)
+            string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
+            string query = @"
+            UPDATE appointment
+            SET 
+                customerId = @customerId,
+                userId = @userId,
+                title = @title,
+                description = @description,
+                location = @location,
+                contact = @contact,
+                type = @type,
+                url = @url,
+                start = @start,
+                end = @end,
+                lastUpdate = NOW(),
+                lastUpdateBy = @userId
+            WHERE appointmentId = @appointmentId";
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@appointmentId", _appointmentId);
+                        cmd.Parameters.AddWithValue("@customerId", customerId);
+                        cmd.Parameters.AddWithValue("@userId", userId);
+                        cmd.Parameters.AddWithValue("@title", title);
+                        cmd.Parameters.AddWithValue("@description", description);
+                        cmd.Parameters.AddWithValue("@location", location);
+                        cmd.Parameters.AddWithValue("@contact", contact);
+                        cmd.Parameters.AddWithValue("@type", type);
+                        cmd.Parameters.AddWithValue("@url", url);
+                        cmd.Parameters.AddWithValue("@start", startUTC);  // Store as UTC
+                        cmd.Parameters.AddWithValue("@end", endUTC);      // Store as UTC
+                        cmd.Parameters.AddWithValue("@updatedBy", userId);
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            _manageAppointments.PopulateGrid();
+                            MessageBox.Show("Appointment has been updated!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Update failed. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        // this will load the appointment data from the passed appointmentid
         private void LoadAppointmentData()
         {
             // Retrieve the connection string from ConfigurationManager
@@ -91,6 +198,7 @@ namespace PrachtSchedulingApp
             }
         }
 
+        // this will populate the customer combobox
         private void PopulateCustomerComboBox()
         {
             try
@@ -116,111 +224,7 @@ namespace PrachtSchedulingApp
             }
         }
 
-        private void EditAppointment_Load(object sender, EventArgs e)
-        {
-            PopulateCustomerComboBox();
-            LoadAppointmentData();
-        }
-
-        private void btnSubmit_Click(object sender, EventArgs e)
-        {
-            // Gather updated values from the form
-            int customerId = (int)cboCustomer.SelectedValue;
-            int userId = CurrentUser.UserId;
-            string title = txtTitle.Text;
-            string description = txtDesc.Text;
-            string location = txtLocation.Text;
-            string contact = txtContact.Text;
-            string type = txtType.Text;
-            string url = txtURL.Text;
-            DateTime start = dtpStart.Value;  // Local time from DateTimePicker
-            DateTime end = dtpEnd.Value;      // Local time from DateTimePicker
-
-            // Convert start and end to UTC time for storage
-            DateTime startUTC = start.ToUniversalTime();
-            DateTime endUTC = end.ToUniversalTime();
-
-            // Check if appointment is within business hours (local time)
-            TimeZoneInfo estZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-            DateTime startEST = TimeZoneInfo.ConvertTime(start, estZone);
-            DateTime endEST = TimeZoneInfo.ConvertTime(end, estZone);
-
-            if (startEST.DayOfWeek == DayOfWeek.Saturday || startEST.DayOfWeek == DayOfWeek.Sunday ||
-                startEST.Hour < 9 || endEST.Hour > 17)
-            {
-                MessageBox.Show("Appointments must be scheduled between 9:00 AM and 5:00 PM, Monday–Friday, Eastern Standard Time.", "Invalid Time", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Check for overlapping appointments
-            if (IsAppointmentOverlapping(startUTC, endUTC, customerId))
-            {
-                MessageBox.Show("The selected time slot overlaps with an existing appointment. Please choose a different time.", "Overlapping Appointment", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Update appointment in the database (store UTC times)
-            string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
-            string query = @"
-    UPDATE appointment
-    SET 
-        customerId = @customerId,
-        userId = @userId,
-        title = @title,
-        description = @description,
-        location = @location,
-        contact = @contact,
-        type = @type,
-        url = @url,
-        start = @start,
-        end = @end,
-        lastUpdate = NOW(),
-        lastUpdateBy = @userId
-    WHERE appointmentId = @appointmentId";
-
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@appointmentId", _appointmentId);
-                        cmd.Parameters.AddWithValue("@customerId", customerId);
-                        cmd.Parameters.AddWithValue("@userId", userId);
-                        cmd.Parameters.AddWithValue("@title", title);
-                        cmd.Parameters.AddWithValue("@description", description);
-                        cmd.Parameters.AddWithValue("@location", location);
-                        cmd.Parameters.AddWithValue("@contact", contact);
-                        cmd.Parameters.AddWithValue("@type", type);
-                        cmd.Parameters.AddWithValue("@url", url);
-                        cmd.Parameters.AddWithValue("@start", startUTC);  // Store as UTC
-                        cmd.Parameters.AddWithValue("@end", endUTC);      // Store as UTC
-                        cmd.Parameters.AddWithValue("@updatedBy", userId);
-
-                        int rowsAffected = cmd.ExecuteNonQuery();
-
-                        if (rowsAffected > 0)
-                        {
-                            _manageAppointments.PopulateGrid();
-                            MessageBox.Show("Appointment has been updated!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Update failed. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"An error occurred: {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-
+        // this checks if the appointment being edited overlaps with an existing customer appointment
         private bool IsAppointmentOverlapping(DateTime start, DateTime end, int customerId)
         {
             // Query the database to check for overlapping appointments
@@ -245,6 +249,7 @@ namespace PrachtSchedulingApp
             return overlappingAppointments > 0;
         }
 
+        // I will need to come back and edit this when customer forms are done.
         private void btnAddNewCustomer_Click(object sender, EventArgs e)
         {
             MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

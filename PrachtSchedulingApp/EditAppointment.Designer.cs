@@ -55,7 +55,7 @@
             // btnSubmit
             // 
             this.btnSubmit.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnSubmit.Location = new System.Drawing.Point(0, 338);
+            this.btnSubmit.Location = new System.Drawing.Point(0, 363);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(584, 23);
             this.btnSubmit.TabIndex = 3;
@@ -265,7 +265,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 361);
+            this.ClientSize = new System.Drawing.Size(584, 386);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "EditAppointment";
