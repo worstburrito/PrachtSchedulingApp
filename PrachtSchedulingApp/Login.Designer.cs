@@ -34,6 +34,7 @@
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
+            this.btnCreateAccount = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +53,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(384, 112);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(380, 112);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lblUsername
@@ -75,14 +76,14 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(111, 3);
+            this.txtUsername.Location = new System.Drawing.Point(110, 3);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(180, 20);
             this.txtUsername.TabIndex = 2;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(111, 59);
+            this.txtPassword.Location = new System.Drawing.Point(110, 59);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(180, 20);
@@ -91,21 +92,33 @@
             // btnLogin
             // 
             this.btnLogin.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnLogin.Location = new System.Drawing.Point(0, 118);
+            this.btnLogin.Location = new System.Drawing.Point(0, 103);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(384, 43);
+            this.btnLogin.Size = new System.Drawing.Size(380, 43);
             this.btnLogin.TabIndex = 1;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
+            // btnCreateAccount
+            // 
+            this.btnCreateAccount.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnCreateAccount.Location = new System.Drawing.Point(0, 146);
+            this.btnCreateAccount.Name = "btnCreateAccount";
+            this.btnCreateAccount.Size = new System.Drawing.Size(380, 43);
+            this.btnCreateAccount.TabIndex = 2;
+            this.btnCreateAccount.Text = "Create Account";
+            this.btnCreateAccount.UseVisualStyleBackColor = true;
+            this.btnCreateAccount.Click += new System.EventHandler(this.btnCreateAccount_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 161);
+            this.ClientSize = new System.Drawing.Size(380, 189);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.btnCreateAccount);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.Name = "Login";
             this.Text = "Login";
@@ -124,5 +137,6 @@
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Button btnCreateAccount;
     }
 }

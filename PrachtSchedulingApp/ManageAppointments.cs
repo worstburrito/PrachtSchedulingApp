@@ -24,7 +24,6 @@ namespace PrachtSchedulingApp
         // Manage Appointments Form on Load
         private void ManageAppointments_Load(object sender, EventArgs e)
         {
-            this.Width = Screen.PrimaryScreen.WorkingArea.Width;
             PopulateGrid();
         }
 

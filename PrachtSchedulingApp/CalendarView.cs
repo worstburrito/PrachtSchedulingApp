@@ -21,7 +21,6 @@ namespace PrachtSchedulingApp
 
         private void CalendarView_Load(object sender, EventArgs e)
         {
-            this.Width = Screen.PrimaryScreen.WorkingArea.Width;
             PopulateGrid();
         }
 

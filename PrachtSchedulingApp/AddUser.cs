@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PrachtSchedulingApp.Login;
 
 namespace PrachtSchedulingApp
 {
@@ -23,34 +24,6 @@ namespace PrachtSchedulingApp
 
         private void AddUser_Load(object sender, EventArgs e)
         {
-            PopulateUserComboBox();
-        }
-
-        private void PopulateUserComboBox()
-        {
-            try
-            {
-                // Open connection string and write query
-                string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
-                MySqlConnection con = new MySqlConnection(connectionString);
-
-                con.Open();
-                string query = "SELECT userId, userName FROM user WHERE active = 1";  // Optional: to filter only active customers
-                MySqlCommand cmd = new MySqlCommand(query, con);
-                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-
-                DataTable userComboBox = new DataTable();
-                adapter.Fill(userComboBox);
-
-                cboUser.DisplayMember = "userName";
-                cboUser.ValueMember = "userId";
-
-                cboUser.DataSource = userComboBox;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -59,11 +32,15 @@ namespace PrachtSchedulingApp
             {
                 // Getting the selected values and text from the form controls
                 string username = txtUsername.Text;
-                int userId = (int)cboUser.SelectedValue;
+                int userId = CurrentUser.UserId;
                 int active = 1;
                 DateTime createDate = DateTime.Now;
-                string password = "password";
+                string password = txtPassword.Text;
+                string confirmPassword = txtConfirmPassword.Text;
 
+                // Confirm password match
+                if (password == confirmPassword)
+                {
 
                 // Open connection string and write query
                 string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
@@ -95,6 +72,11 @@ namespace PrachtSchedulingApp
 
                 MessageBox.Show($"New user has been added!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();
+                }
+                else
+                {
+                    MessageBox.Show($"Password fields not do match.", "Password Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {

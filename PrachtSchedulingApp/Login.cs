@@ -186,5 +186,15 @@ namespace PrachtSchedulingApp
         private void Login_Load(object sender, EventArgs e)
         {
         }
+
+        private void btnCreateAccount_Click(object sender, EventArgs e)
+        {
+            if (!Utils.FormIsOpen("AddUser"))
+            {
+                var addUser = new AddUser();
+                addUser.MdiParent = this.MdiParent;
+                addUser.Show();
+            }
+        }
     }
 }

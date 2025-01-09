@@ -34,7 +34,20 @@ namespace PrachtSchedulingApp
 
                 // Open the connection and make a SQL query call
                 con.Open();
-                string query = "SELECT * FROM user";
+                // string query = "SELECT * FROM user";
+                string query = @"
+                SELECT
+                    u.userId,
+                    u.userName,
+                    u.password,
+                    u.active,
+                    u.createDate,
+                    uc.userName AS createdBy,
+                    u.lastUpdate,
+                    ul.userName AS lastUpdateBy
+                FROM user u
+                LEFT JOIN user uc ON u.createdBy = uc.userId
+                LEFT JOIN user ul ON u.lastUpdateBy = ul.userId";
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 DataTable userLocal = new DataTable();
