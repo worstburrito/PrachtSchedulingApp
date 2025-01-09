@@ -18,12 +18,16 @@ namespace PrachtSchedulingApp
 {
     public partial class Login : Form
     {
+        /* Note to evaluator: This Login form defaults to English. 
+         * If your region and language are set to Mexico and Mexico (Spanish) 
+         * the success/failure messages will translate */
 
         public Login()
         {
             InitializeComponent();
         }
 
+        // This checks the database to match the user/pw combo 
         private (bool isValid, int userId) ValidateLogin(string username, string password)
         {
             try
@@ -72,35 +76,48 @@ namespace PrachtSchedulingApp
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = txtUsername.Text.Trim();
-            string password = txtPassword.Text.Trim();
-
-
-            // Validate login and get userId
-            var (isValid, userId) = ValidateLogin(username, password);
-
-            if (isValid)
+            try
             {
-                LogLoginHistory(username, true);
-                CurrentUser.Username = username;
-                CurrentUser.UserId = userId;
+                string username = txtUsername.Text.Trim();
+                string password = txtPassword.Text.Trim();
 
-                // Display success message
-                MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string language = GetLanguageBasedOnRegion();
 
-                // Proceed to the next window
-                var mainWindow = new MainWindow(this);
-                mainWindow.Show();
-                this.Hide();
+                // Validate login and get userId
+                var (isValid, userId) = ValidateLogin(username, password);
+
+                if (isValid)
+                {
+                    LogLoginHistory(username, true);
+                    CurrentUser.Username = username;
+                    CurrentUser.UserId = userId;
+
+                    // Display success message
+                    MessageBox.Show(language == "Spanish" ? Messages["LoginSuccess"].Spanish : Messages["LoginSuccess"].English,
+                                    language == "Spanish" ? "Éxito" : "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Proceed to the next window
+                    var mainWindow = new MainWindow(this);
+                    mainWindow.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    LogLoginHistory(username, false);
+
+                    // Display error message
+                    MessageBox.Show(language == "Spanish" ? Messages["LoginFailed"].Spanish : Messages["LoginFailed"].English,
+                                    language == "Spanish" ? "Error de inicio de sesión" : "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                LogLoginHistory(username, false);
-
-                // Display error message
-                MessageBox.Show("The username and password do not match.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+        // This updates the Login History Log
         private void LogLoginHistory(string username, bool isSuccess)
         {
             // Get the root project directory
@@ -138,11 +155,33 @@ namespace PrachtSchedulingApp
             }
         }
 
+        // This grabs the username and userid of the user logging in
         public static class CurrentUser
         {
             public static string Username { get; set; }
             public static int UserId { get; set; }
         }
+
+        // This determines the language based on the system's culture
+        private string GetLanguageBasedOnRegion()
+        {
+            // Get the current culture info
+            var culture = System.Globalization.CultureInfo.CurrentCulture;
+
+            // Check if the region is Mexico (es-MX) and return the appropriate language
+            if (culture.Name == "es-MX")
+                return "Spanish";
+            return "English"; // Default to English
+        }
+
+        // This stores the messages for the translation
+        private Dictionary<string, (string English, string Spanish)> Messages = new Dictionary<string, (string English, string Spanish)>()
+        {
+            { "LoginSuccess", ("Login successful!", "¡Inicio de sesión exitoso!") },
+            { "LoginFailed", ("The username and password do not match.", "El nombre de usuario y la contraseña no coinciden.") },
+            { "ErrorOccurred", ("An error occurred: {0}", "Ocurrió un error: {0}") }
+        };
+
 
         private void Login_Load(object sender, EventArgs e)
         {
