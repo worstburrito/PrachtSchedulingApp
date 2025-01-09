@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -17,12 +18,10 @@ namespace PrachtSchedulingApp
 {
     public partial class Login : Form
     {
-        
+
         public Login()
         {
             InitializeComponent();
-            
-
         }
 
         private (bool isValid, int userId) ValidateLogin(string username, string password)
@@ -71,89 +70,37 @@ namespace PrachtSchedulingApp
             }
         }
 
-
-
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            // Get user location
-            string location = GetUserLocation();
 
             // Validate login and get userId
             var (isValid, userId) = ValidateLogin(username, password);
 
             if (isValid)
             {
-                // Log success
                 LogLoginHistory(username, true);
-
-                // Set the current user details
                 CurrentUser.Username = username;
                 CurrentUser.UserId = userId;
 
-                // Translate success message - Turning this off for now. It's kind of annoying.
-                // string successMessage = TranslateMessage("Login successful!", location);
-                // MessageBox.Show(successMessage, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Display success message
+                MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Proceed to the next step in your application
+                // Proceed to the next window
                 var mainWindow = new MainWindow(this);
                 mainWindow.Show();
                 this.Hide();
             }
             else
             {
-                // Log failure
                 LogLoginHistory(username, false);
 
-                // Translate error message
-                string errorMessage = TranslateMessage("The username and password do not match.", location);
-                MessageBox.Show(errorMessage, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // Display error message
+                MessageBox.Show("The username and password do not match.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
-
-        private string GetUserLocation()
-        {
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    var response = client.GetStringAsync("http://ip-api.com/json/").Result;
-                    dynamic locationData = JsonConvert.DeserializeObject(response);
-                    string country = locationData.country;
-                    return country;
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Unable to fetch location: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return "Unknown";
-            }
-        }
-
-        private string TranslateMessage(string message, string location)
-        {
-            if (location.Equals("Spain") || location.Equals("Mexico") || location.Equals("Argentina") || location.Equals("Colombia"))
-            {
-                // Spanish-speaking countries
-                switch (message)
-                {
-                    case "Login successful!":
-                        return "¡Inicio de sesión exitoso!";
-                    case "The username and password do not match.":
-                        return "El nombre de usuario y la contraseña no coinciden.";
-                    case "Invalid login. Please check your username, password, or ensure your account is active.":
-                        return "Inicio de sesión no válido. Por favor, revise su nombre de usuario, contraseña o asegúrese de que su cuenta esté activa.";
-                    default:
-                        return message;
-                }
-            }
-            return message; // Default to English
-        }
-
         private void LogLoginHistory(string username, bool isSuccess)
         {
             // Get the root project directory
@@ -193,10 +140,9 @@ namespace PrachtSchedulingApp
 
         public static class CurrentUser
         {
-            public static string Username { get; set;}
-            public static int UserId { get; set;}
+            public static string Username { get; set; }
+            public static int UserId { get; set; }
         }
-
 
         private void Login_Load(object sender, EventArgs e)
         {
