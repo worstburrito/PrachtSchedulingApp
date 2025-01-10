@@ -76,21 +76,37 @@ namespace PrachtSchedulingApp
         private void addCustomerRecords_Click(object sender, EventArgs e)
         {
             MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
 
         private void Report1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (!Utils.FormIsOpen("AddAppointment"))
+            {
+                var report1 = new Report1();
+                report1.MdiParent = this;
+                report1.Show();
+            }
         }
 
         private void Report2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (!Utils.FormIsOpen("AddAppointment"))
+            {
+                var report2 = new Report2();
+                report2.MdiParent = this;
+                report2.Show();
+            }
         }
 
         private void Report3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (!Utils.FormIsOpen("AddAppointment"))
+            {
+                var loginHistoryReport = new LoginHistoryReport();
+                loginHistoryReport.MdiParent = this;
+                loginHistoryReport.Show();
+            }
         }
 
         private void Report4_Click(object sender, EventArgs e)
@@ -103,11 +119,7 @@ namespace PrachtSchedulingApp
             }
         }
 
-        private void lblMainStatus_Click(object sender, EventArgs e)
-        {
-            
-        }
-
+        
         private void LoginHistory_Click(object sender, EventArgs e)
         {
             if (!Utils.FormIsOpen("AddAppointment"))
@@ -117,8 +129,8 @@ namespace PrachtSchedulingApp
                 loginHistoryReport.Show();
             }
         }
-
-        private void ManageUsers_Click(object sender, EventArgs e)
+        
+               private void manageUsers_Click(object sender, EventArgs e)
         {
             if (!Utils.FormIsOpen("ManageUsers"))
             {

@@ -40,9 +40,7 @@
             this.Report1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Report2 = new System.Windows.Forms.ToolStripMenuItem();
             this.Report3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ManageUsers = new System.Windows.Forms.ToolStripMenuItem();
-            this.LoginHistory = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.userStatus = new System.Windows.Forms.StatusStrip();
             this.lblUserStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainMenu.SuspendLayout();
@@ -56,7 +54,7 @@
             this.manageAppointments,
             this.viewSchedule,
             this.runReport,
-            this.adminToolStripMenuItem});
+            this.manageUsers});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
@@ -70,7 +68,7 @@
             this.viewCustomerRecords,
             this.addCustomerRecords});
             this.manageCustomerRecords.Name = "manageCustomerRecords";
-            this.manageCustomerRecords.Size = new System.Drawing.Size(162, 20);
+            this.manageCustomerRecords.Size = new System.Drawing.Size(162, 22);
             this.manageCustomerRecords.Text = "Manage Customer Records";
             // 
             // viewCustomerRecords
@@ -93,7 +91,7 @@
             this.viewAllAppointments,
             this.addAppointment});
             this.manageAppointments.Name = "manageAppointments";
-            this.manageAppointments.Size = new System.Drawing.Size(141, 20);
+            this.manageAppointments.Size = new System.Drawing.Size(141, 22);
             this.manageAppointments.Text = "Manage Appointments";
             // 
             // viewAllAppointments
@@ -113,7 +111,7 @@
             // viewSchedule
             // 
             this.viewSchedule.Name = "viewSchedule";
-            this.viewSchedule.Size = new System.Drawing.Size(95, 20);
+            this.viewSchedule.Size = new System.Drawing.Size(95, 22);
             this.viewSchedule.Text = "View Schedule";
             this.viewSchedule.Click += new System.EventHandler(this.viewSchedule_Click);
             // 
@@ -124,7 +122,7 @@
             this.Report2,
             this.Report3});
             this.runReport.Name = "runReport";
-            this.runReport.Size = new System.Drawing.Size(78, 20);
+            this.runReport.Size = new System.Drawing.Size(78, 22);
             this.runReport.Text = "Run Report";
             // 
             // Report1
@@ -145,31 +143,15 @@
             // 
             this.Report3.Name = "Report3";
             this.Report3.Size = new System.Drawing.Size(232, 22);
-            this.Report3.Text = "Report 3";
+            this.Report3.Text = "User Login Log";
             this.Report3.Click += new System.EventHandler(this.Report3_Click);
             // 
-            // adminToolStripMenuItem
+            // manageUsers
             // 
-            this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ManageUsers,
-            this.LoginHistory});
-            this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            this.adminToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
-            this.adminToolStripMenuItem.Text = "Admin";
-            // 
-            // ManageUsers
-            // 
-            this.ManageUsers.Name = "ManageUsers";
-            this.ManageUsers.Size = new System.Drawing.Size(148, 22);
-            this.ManageUsers.Text = "Manage Users";
-            this.ManageUsers.Click += new System.EventHandler(this.ManageUsers_Click);
-            // 
-            // LoginHistory
-            // 
-            this.LoginHistory.Name = "LoginHistory";
-            this.LoginHistory.Size = new System.Drawing.Size(148, 22);
-            this.LoginHistory.Text = "Login History";
-            this.LoginHistory.Click += new System.EventHandler(this.LoginHistory_Click);
+            this.manageUsers.Name = "manageUsers";
+            this.manageUsers.Size = new System.Drawing.Size(93, 22);
+            this.manageUsers.Text = "Manage Users";
+            this.manageUsers.Click += new System.EventHandler(this.manageUsers_Click);
             // 
             // userStatus
             // 
@@ -228,9 +210,7 @@
         private System.Windows.Forms.ToolStripMenuItem Report1;
         private System.Windows.Forms.ToolStripMenuItem Report2;
         private System.Windows.Forms.ToolStripMenuItem Report3;
-        private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ManageUsers;
-        private System.Windows.Forms.ToolStripMenuItem LoginHistory;
+        private System.Windows.Forms.ToolStripMenuItem manageUsers;
         private System.Windows.Forms.StatusStrip userStatus;
         private System.Windows.Forms.ToolStripStatusLabel lblUserStatus;
     }
