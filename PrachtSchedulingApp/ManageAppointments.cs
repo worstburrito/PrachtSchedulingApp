@@ -98,7 +98,6 @@ namespace PrachtSchedulingApp
                         }
                         catch (Exception ex)
                         {
-                            // Handle errors and display a message
                             MessageBox.Show($"An error occurred: {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
@@ -106,7 +105,6 @@ namespace PrachtSchedulingApp
             }
             else
             {
-                // Inform the user to select a row if none is selected
                 MessageBox.Show("Please select an appointment to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
@@ -119,7 +117,6 @@ namespace PrachtSchedulingApp
 
                 DataTable appointments = GetAppointmentData();
                 DatabaseHelper.TimeHelper(appointments, "start", "end", "createDate", "lastUpdate");
-                //ConvertToLocalTime(appointments);
                 DatabaseHelper.PopulateAppointments(dgvAppointments, appointments);
             }
             catch (MySqlException ex)

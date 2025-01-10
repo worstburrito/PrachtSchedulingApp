@@ -119,7 +119,6 @@ namespace PrachtSchedulingApp
             }
         }
 
-        
         private void LoginHistory_Click(object sender, EventArgs e)
         {
             if (!Utils.FormIsOpen("AddAppointment"))

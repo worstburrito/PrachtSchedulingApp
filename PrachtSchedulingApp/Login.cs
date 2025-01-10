@@ -27,13 +27,10 @@ namespace PrachtSchedulingApp
             InitializeComponent();
         }
 
-        // This determines the language based on the system's culture
         private string GetLanguageBasedOnRegion()
         {
-            // Get the current culture info
             var culture = System.Globalization.CultureInfo.CurrentCulture;
 
-            // Check if the region is Mexico (es-MX) and return the appropriate language
             if (culture.Name == "es-MX")
                 return "Spanish";
             return "English"; // Default to English
@@ -41,10 +38,8 @@ namespace PrachtSchedulingApp
 
         private void Login_Load(object sender, EventArgs e)
         {
-            // Determine the language
             string language = GetLanguageBasedOnRegion();
 
-            // Update UI elements based on language
             if (language == "Spanish")
             {
                 this.Text = "Iniciar sesión";
@@ -83,21 +78,19 @@ namespace PrachtSchedulingApp
 
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
-                        // Add parameters to prevent SQL injection
                         cmd.Parameters.AddWithValue("@username", username);
                         cmd.Parameters.AddWithValue("@password", password);
 
-                        // Execute the query and get the results
                         using (var reader = cmd.ExecuteReader())
                         {
                             if (reader.Read())
                             {
-                                int userId = reader.GetInt32(0); // Retrieve the userId from the first column
-                                return (true, userId); // Login is valid, return userId
+                                int userId = reader.GetInt32(0); 
+                                return (true, userId); 
                             }
                             else
                             {
-                                return (false, 0); // Login failed, return 0 for UserId
+                                return (false, 0); 
                             }
                         }
                     }
@@ -176,14 +169,10 @@ namespace PrachtSchedulingApp
 
             try
             {
-                // Write the log entry using StreamWriter to prevent file locking issues
                 using (StreamWriter writer = new StreamWriter(logPath, true))
                 {
                     writer.WriteLine(logEntry);
                 }
-
-                // Debug: Confirm write success
-                // MessageBox.Show($"Log entry written successfully to: {logPath}", "Debug Info");
             }
             catch (Exception ex)
             {

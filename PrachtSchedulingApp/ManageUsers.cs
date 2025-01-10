@@ -28,49 +28,49 @@ namespace PrachtSchedulingApp
         {
             try
             {
-                // Open connection string and write query
                 string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
-                MySqlConnection con = new MySqlConnection(connectionString);
 
-                // Open the connection and make a SQL query call
-                con.Open();
-                // string query = "SELECT * FROM user";
-                string query = @"
-                SELECT
-                    u.userId,
-                    u.userName,
-                    u.password,
-                    u.active,
-                    u.createDate,
-                    uc.userName AS createdBy,
-                    u.lastUpdate,
-                    ul.userName AS lastUpdateBy
-                FROM user u
-                LEFT JOIN user uc ON u.createdBy = uc.userId
-                LEFT JOIN user ul ON u.lastUpdateBy = ul.userId";
-                MySqlCommand cmd = new MySqlCommand(query, con);
-                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                DataTable userLocal = new DataTable();
-                adapter.Fill(userLocal);
+                using (MySqlConnection con = new MySqlConnection(connectionString))
+                {
+                    con.Open();
+                    string query = @"
+                    SELECT
+                        u.userId,
+                        u.userName,
+                        u.password,
+                        u.active,
+                        u.createDate,
+                        uc.userName AS createdBy,
+                        u.lastUpdate,
+                        ul.userName AS lastUpdateBy
+                    FROM user u
+                    LEFT JOIN user uc ON u.createdBy = uc.userId
+                    LEFT JOIN user ul ON u.lastUpdateBy = ul.userId";
 
-                // Set the data grid source
-                dgvManageUsers.DataSource = userLocal;
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                        DataTable userLocal = new DataTable();
+                        adapter.Fill(userLocal);
 
-                // Adjust column headers to preference
-                dgvManageUsers.Columns["userId"].Visible = false;
-                dgvManageUsers.Columns["password"].Visible = false;
-                dgvManageUsers.Columns["userName"].HeaderText = "Username";
-                dgvManageUsers.Columns["active"].HeaderText = "Active Status";
-                dgvManageUsers.Columns["createDate"].HeaderText = "Date Created";
-                dgvManageUsers.Columns["createdBy"].HeaderText = "Created By";
-                dgvManageUsers.Columns["lastUpdate"].HeaderText = "Last Update Made";
-                dgvManageUsers.Columns["lastUpdateBy"].HeaderText = "Last Updated By";
+                        // Set the data grid source
+                        dgvManageUsers.DataSource = userLocal;
 
-
+                        // Adjust column headers to preference
+                        dgvManageUsers.Columns["userId"].Visible = false;
+                        dgvManageUsers.Columns["password"].Visible = false;
+                        dgvManageUsers.Columns["userName"].HeaderText = "Username";
+                        dgvManageUsers.Columns["active"].HeaderText = "Active Status";
+                        dgvManageUsers.Columns["createDate"].HeaderText = "Date Created";
+                        dgvManageUsers.Columns["createdBy"].HeaderText = "Created By";
+                        dgvManageUsers.Columns["lastUpdate"].HeaderText = "Last Update Made";
+                        dgvManageUsers.Columns["lastUpdateBy"].HeaderText = "Last Updated By";
+                    }
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
