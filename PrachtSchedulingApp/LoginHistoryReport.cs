@@ -21,8 +21,7 @@ namespace PrachtSchedulingApp
         private void btnRunReport_Click(object sender, EventArgs e)
         {
             // Get the root project directory
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string projectRoot = Directory.GetParent(baseDirectory)?.Parent?.Parent?.FullName;
+            string projectRoot = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)?.Parent?.Parent?.FullName;
 
             // Ensure projectRoot is not null
             if (string.IsNullOrEmpty(projectRoot))
@@ -36,17 +35,14 @@ namespace PrachtSchedulingApp
 
             try
             {
-                // Read all lines from the log file
+                // Read all lines from the log file and get the last 25 lines using lambda expressions
                 if (File.Exists(logPath))
                 {
-                    var allLines = File.ReadAllLines(logPath);
-
-                    // Get the last 10 lines
-                    var last10Lines = allLines.Reverse().Take(10).Reverse();
-
-                    // Display the lines in the RichTextBox
                     rtbReport.Clear();
-                    rtbReport.Lines = last10Lines.ToArray();
+                    rtbReport.Lines = File.ReadAllLines(logPath)
+                                          .Reverse()  
+                                          .Take(25)   
+                                          .ToArray();
                 }
                 else
                 {
@@ -58,6 +54,5 @@ namespace PrachtSchedulingApp
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
     }
 }

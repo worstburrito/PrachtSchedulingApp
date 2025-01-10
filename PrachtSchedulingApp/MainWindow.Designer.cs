@@ -143,7 +143,7 @@
             // 
             this.Report3.Name = "Report3";
             this.Report3.Size = new System.Drawing.Size(232, 22);
-            this.Report3.Text = "User Login Log";
+            this.Report3.Text = "Login History Report";
             this.Report3.Click += new System.EventHandler(this.Report3_Click);
             // 
             // manageUsers

@@ -66,7 +66,9 @@ namespace PrachtSchedulingApp
                     JOIN 
                         user u3 ON a.createdBy = u3.userId
                     WHERE 
-                        u1.userName = @user";
+                        u1.userName = @user
+                    ORDER BY
+                        a.start;";
 
                     MySqlCommand cmd = new MySqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@user", user);
@@ -151,7 +153,9 @@ namespace PrachtSchedulingApp
             JOIN 
                 user u2 ON a.lastUpdateBy = u2.userId
             JOIN 
-                user u3 ON a.createdBy = u3.userId";
+                user u3 ON a.createdBy = u3.userId
+            ORDER BY
+                a.start;";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
