@@ -34,6 +34,20 @@ namespace PrachtSchedulingApp
             gridView.Columns["lastUpdate"].HeaderText = "Last Update";
         }
 
+        public static void PopulateCustomers(DataGridView gridView, DataTable dataTable)
+        {
+            gridView.DataSource = dataTable;
+
+            // Adjust column headers to preference
+            gridView.Columns["customerId"].Visible = false;
+            gridView.Columns["customerName"].HeaderText = "Customer Name";
+            gridView.Columns["customerAddress"].HeaderText = "Address";
+            gridView.Columns["active"].HeaderText = "Active Status";
+            gridView.Columns["createDate"].HeaderText = "Date Created";
+            gridView.Columns["createdBy"].HeaderText = "Created By";
+            gridView.Columns["lastUpdate"].HeaderText = "Last Update";
+            gridView.Columns["lastUpdateBy"].HeaderText = "Last Updated By";
+        }
         public static void TimeHelper(DataTable dataTable, string startColumn, string endColumn, string createdColumn, string updatedColumn)
         {
             foreach (DataRow row in dataTable.Rows)

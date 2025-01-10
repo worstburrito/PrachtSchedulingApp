@@ -28,10 +28,13 @@ namespace PrachtSchedulingApp
         {
             try
             {
+                // Open connection string and write query
                 string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
 
+                // Use 'using' for automatic disposal of the connection and command objects
                 using (MySqlConnection con = new MySqlConnection(connectionString))
                 {
+                    // Open the connection and make a SQL query call
                     con.Open();
                     string query = @"
                     SELECT
@@ -50,11 +53,18 @@ namespace PrachtSchedulingApp
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                        DataTable userLocal = new DataTable();
-                        adapter.Fill(userLocal);
+                        DataTable users = new DataTable();
+                        adapter.Fill(users);
+
+                        // Convert date/times
+                        foreach (DataRow row in users.Rows)
+                        {
+                            row["createDate"] = ((DateTime)row["createDate"]).ToLocalTime();
+                            row["lastUpdate"] = ((DateTime)row["lastUpdate"]).ToLocalTime();
+                        }
 
                         // Set the data grid source
-                        dgvManageUsers.DataSource = userLocal;
+                        dgvManageUsers.DataSource = users;
 
                         // Adjust column headers to preference
                         dgvManageUsers.Columns["userId"].Visible = false;
@@ -73,6 +83,7 @@ namespace PrachtSchedulingApp
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {

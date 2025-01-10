@@ -17,68 +17,75 @@ namespace PrachtSchedulingApp
         public ManageCustomerRecords()
         {
             InitializeComponent();
+            PopulateGrid();
         }
 
-        private void ManageCustomerRecords_Load(object sender, EventArgs e)
+        public void PopulateGrid()
         {
             try
             {
-                // Open connection string and write query
-                string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
-                MySqlConnection con = new MySqlConnection(connectionString);
+                DataTable customers = GetCustomerData();
 
-                con.Open();
-                string query = "SELECT * FROM customer";
-                MySqlCommand cmd = new MySqlCommand(query, con);
-                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-
-                DataTable custUTC = new DataTable();
-                DataTable custLocal = new DataTable();
-                adapter.Fill(custUTC);
-                adapter.Fill(custLocal);
-
-                // Convert UTC to Local Time
-                for (int i = 0; i < custUTC.Rows.Count; i++)
+                // Convert date/times
+                foreach (DataRow row in customers.Rows)
                 {
-                    DateTime x = (DateTime)custUTC.Rows[i]["createDate"];
-                    custLocal.Rows[i]["createDate"] = x.ToLocalTime();
-
-                    DateTime y = (DateTime)custUTC.Rows[i]["lastUpdate"];
-                    custLocal.Rows[i]["lastUpdate"] = y.ToLocalTime();
+                    row["createDate"] = ((DateTime)row["createDate"]).ToLocalTime();
+                    row["lastUpdate"] = ((DateTime)row["lastUpdate"]).ToLocalTime();
                 }
 
-                // Set Data Grid View - Data Source
-                dgvManageCustomerRecords.DataSource = custLocal;
-
-                // Adjust column headers to preference
-                dgvManageCustomerRecords.Columns["customerId"].Visible = false;
-                dgvManageCustomerRecords.Columns["addressId"].Visible = false;
-                dgvManageCustomerRecords.Columns["customerName"].HeaderText = "Name";
-                dgvManageCustomerRecords.Columns["active"].HeaderText = "Active Status";
-                dgvManageCustomerRecords.Columns["createDate"].HeaderText = "Date Created";
-                dgvManageCustomerRecords.Columns["createdBy"].HeaderText = "Created By";
-                dgvManageCustomerRecords.Columns["lastUpdate"].HeaderText = "Last Updated";
-                dgvManageCustomerRecords.Columns["lastUpdateBy"].HeaderText = "Last Updated By";
+                DatabaseHelper.PopulateCustomers(dgvManageCustomerRecords, customers);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private DataTable GetCustomerData()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["localdb"]?.ConnectionString;
+            if (string.IsNullOrEmpty(connectionString))
+                throw new InvalidOperationException("Database connection string is missing or invalid.");
+
+            DataTable customers = new DataTable();
+            using (MySqlConnection con = new MySqlConnection(connectionString))
+            {
+                con.Open();
+                string query = @"
+                    SELECT
+                        c.customerId,
+                        c.customerName,
+                        a.address AS customerAddress,
+                        CAST(c.active AS CHAR) as active,
+                        c.createDate,
+                        c.createdBy,
+                        c.lastUpdate,
+                        c.lastUpdateBy
+                    FROM customer c
+                    JOIN address a ON c.addressId = a.addressId";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                {
+                    adapter.Fill(customers);
+                }
+            }
+            return customers;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
 
-        private void btnUpdateRecord_Click(object sender, EventArgs e)
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
 
-        private void btnDeleteRecord_Click(object sender, EventArgs e)
+        private void btnDeactivate_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            
         }
     }
 }
