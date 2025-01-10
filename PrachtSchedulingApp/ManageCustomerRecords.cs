@@ -56,13 +56,20 @@ namespace PrachtSchedulingApp
                         c.customerId,
                         c.customerName,
                         a.address AS customerAddress,
+                        a.address2 AS customerAddress2,
+                        a.postalCode AS postalCode,
+                        a.phone AS phone,
+                        ci.city AS cityName,
+                        co.country AS countryName,
                         CAST(c.active AS CHAR) as active,
                         c.createDate,
                         c.createdBy,
                         c.lastUpdate,
                         c.lastUpdateBy
                     FROM customer c
-                    JOIN address a ON c.addressId = a.addressId";
+                    JOIN address a ON c.addressId = a.addressId
+                    JOIN city ci ON a.cityId = ci.cityId
+                    JOIN country co ON ci.countryId = co.countryId";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
@@ -75,7 +82,12 @@ namespace PrachtSchedulingApp
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
+            if (!Utils.FormIsOpen("AddCustomer"))
+            {
+                var addCustomer = new AddCustomer(this);
+                addCustomer.MdiParent = this.MdiParent;
+                addCustomer.Show();
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -86,6 +98,11 @@ namespace PrachtSchedulingApp
         private void btnDeactivate_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

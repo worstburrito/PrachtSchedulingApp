@@ -50,13 +50,12 @@
             this.txtURL = new System.Windows.Forms.TextBox();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
-            this.btnAddNewCustomer = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(191, 334);
+            this.btnSubmit.Location = new System.Drawing.Point(271, 334);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(182, 36);
             this.btnSubmit.TabIndex = 3;
@@ -66,10 +65,9 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.6548F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.07117F));
             this.tableLayoutPanel1.Controls.Add(this.btnSubmit, 1, 10);
             this.tableLayoutPanel1.Controls.Add(this.cboUser, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblUser, 0, 1);
@@ -91,7 +89,6 @@
             this.tableLayoutPanel1.Controls.Add(this.txtURL, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.dtpStart, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.dtpEnd, 1, 9);
-            this.tableLayoutPanel1.Controls.Add(this.btnAddNewCustomer, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 10);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -114,7 +111,7 @@
             // cboUser
             // 
             this.cboUser.FormattingEnabled = true;
-            this.cboUser.Location = new System.Drawing.Point(191, 37);
+            this.cboUser.Location = new System.Drawing.Point(271, 37);
             this.cboUser.Name = "cboUser";
             this.cboUser.Size = new System.Drawing.Size(182, 21);
             this.cboUser.TabIndex = 22;
@@ -212,49 +209,49 @@
             // cboCustomer
             // 
             this.cboCustomer.FormattingEnabled = true;
-            this.cboCustomer.Location = new System.Drawing.Point(191, 4);
+            this.cboCustomer.Location = new System.Drawing.Point(271, 4);
             this.cboCustomer.Name = "cboCustomer";
             this.cboCustomer.Size = new System.Drawing.Size(182, 21);
             this.cboCustomer.TabIndex = 10;
             // 
             // txtTitle
             // 
-            this.txtTitle.Location = new System.Drawing.Point(191, 70);
+            this.txtTitle.Location = new System.Drawing.Point(271, 70);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(182, 20);
             this.txtTitle.TabIndex = 12;
             // 
             // txtDesc
             // 
-            this.txtDesc.Location = new System.Drawing.Point(191, 103);
+            this.txtDesc.Location = new System.Drawing.Point(271, 103);
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(182, 20);
             this.txtDesc.TabIndex = 13;
             // 
             // txtLocation
             // 
-            this.txtLocation.Location = new System.Drawing.Point(191, 136);
+            this.txtLocation.Location = new System.Drawing.Point(271, 136);
             this.txtLocation.Name = "txtLocation";
             this.txtLocation.Size = new System.Drawing.Size(182, 20);
             this.txtLocation.TabIndex = 14;
             // 
             // txtContact
             // 
-            this.txtContact.Location = new System.Drawing.Point(191, 169);
+            this.txtContact.Location = new System.Drawing.Point(271, 169);
             this.txtContact.Name = "txtContact";
             this.txtContact.Size = new System.Drawing.Size(182, 20);
             this.txtContact.TabIndex = 15;
             // 
             // txtType
             // 
-            this.txtType.Location = new System.Drawing.Point(191, 202);
+            this.txtType.Location = new System.Drawing.Point(271, 202);
             this.txtType.Name = "txtType";
             this.txtType.Size = new System.Drawing.Size(182, 20);
             this.txtType.TabIndex = 16;
             // 
             // txtURL
             // 
-            this.txtURL.Location = new System.Drawing.Point(191, 235);
+            this.txtURL.Location = new System.Drawing.Point(271, 235);
             this.txtURL.Name = "txtURL";
             this.txtURL.Size = new System.Drawing.Size(182, 20);
             this.txtURL.TabIndex = 17;
@@ -262,7 +259,7 @@
             // dtpStart
             // 
             this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpStart.Location = new System.Drawing.Point(191, 268);
+            this.dtpStart.Location = new System.Drawing.Point(271, 268);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.Size = new System.Drawing.Size(182, 20);
             this.dtpStart.TabIndex = 18;
@@ -270,20 +267,10 @@
             // dtpEnd
             // 
             this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpEnd.Location = new System.Drawing.Point(191, 301);
+            this.dtpEnd.Location = new System.Drawing.Point(271, 301);
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.Size = new System.Drawing.Size(182, 20);
             this.dtpEnd.TabIndex = 19;
-            // 
-            // btnAddNewCustomer
-            // 
-            this.btnAddNewCustomer.Location = new System.Drawing.Point(396, 4);
-            this.btnAddNewCustomer.Name = "btnAddNewCustomer";
-            this.btnAddNewCustomer.Size = new System.Drawing.Size(143, 27);
-            this.btnAddNewCustomer.TabIndex = 20;
-            this.btnAddNewCustomer.Text = "Add New Customer";
-            this.btnAddNewCustomer.UseVisualStyleBackColor = true;
-            this.btnAddNewCustomer.Click += new System.EventHandler(this.btnAddNewCustomer_Click);
             // 
             // EditAppointment
             // 
@@ -323,7 +310,6 @@
         private System.Windows.Forms.TextBox txtURL;
         private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.DateTimePicker dtpEnd;
-        private System.Windows.Forms.Button btnAddNewCustomer;
         private System.Windows.Forms.ComboBox cboUser;
         private System.Windows.Forms.Label lblUser;
     }

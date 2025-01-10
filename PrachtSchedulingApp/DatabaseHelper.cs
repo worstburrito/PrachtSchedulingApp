@@ -38,10 +38,15 @@ namespace PrachtSchedulingApp
         {
             gridView.DataSource = dataTable;
 
-            // Adjust column headers to preference
+            // Adjust column headers and visibility
             gridView.Columns["customerId"].Visible = false;
             gridView.Columns["customerName"].HeaderText = "Customer Name";
-            gridView.Columns["customerAddress"].HeaderText = "Address";
+            gridView.Columns["customerAddress"].HeaderText = "Address Line 1";
+            gridView.Columns["customerAddress2"].HeaderText = "Address Line 2";
+            gridView.Columns["postalCode"].HeaderText = "Postal Code";
+            gridView.Columns["phone"].HeaderText = "Phone Number";
+            gridView.Columns["cityName"].HeaderText = "City";
+            gridView.Columns["countryName"].HeaderText = "Country";
             gridView.Columns["active"].HeaderText = "Active Status";
             gridView.Columns["createDate"].HeaderText = "Date Created";
             gridView.Columns["createdBy"].HeaderText = "Created By";

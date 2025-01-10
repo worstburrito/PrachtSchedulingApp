@@ -263,12 +263,6 @@ namespace PrachtSchedulingApp
             return overlappingAppointments > 0;
         }
 
-        // I will need to come back and edit this when customer forms are done.
-        private void btnAddNewCustomer_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
         // this will populate the customer combobox
         private void PopulateCustomerComboBox()
         {

@@ -185,11 +185,6 @@ namespace PrachtSchedulingApp
             }
         }
 
-        private void btnAddNewCustomer_Click(object sender, EventArgs e)
-        {
-            // Will come back and edit this when the Customer forms are done.
-            MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
         private void PopulateCustomerComboBox()
         {
             string query = "SELECT customerId, customerName FROM customer WHERE active = 1";
