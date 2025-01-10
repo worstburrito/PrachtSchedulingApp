@@ -113,12 +113,14 @@
     <Compile Include="AddUser.Designer.cs">
       <DependentUpon>AddUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="AppointmentsHelpers.cs" />
     <Compile Include="CalendarView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CalendarView.Designer.cs">
       <DependentUpon>CalendarView.cs</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseHelper.cs" />
     <Compile Include="Database\DBConnection.cs" />
     <Compile Include="EditAppointment.cs">
       <SubType>Form</SubType>

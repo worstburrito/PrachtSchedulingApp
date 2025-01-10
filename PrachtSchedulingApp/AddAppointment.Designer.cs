@@ -292,7 +292,6 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "AddAppointment";
             this.Text = "Add New Appointment";
-            this.Load += new System.EventHandler(this.AddAppointment_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

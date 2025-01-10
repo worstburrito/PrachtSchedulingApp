@@ -28,26 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvDisplayAppointments = new System.Windows.Forms.DataGridView();
+            this.dgvAppointments = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblSelectUser = new System.Windows.Forms.Label();
             this.btnFindAppointments = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.cboUser = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDisplayAppointments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dgvDisplayAppointments
+            // dgvAppointments
             // 
-            this.dgvDisplayAppointments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvDisplayAppointments.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dgvDisplayAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDisplayAppointments.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvDisplayAppointments.Location = new System.Drawing.Point(0, 105);
-            this.dgvDisplayAppointments.Name = "dgvDisplayAppointments";
-            this.dgvDisplayAppointments.Size = new System.Drawing.Size(1155, 383);
-            this.dgvDisplayAppointments.TabIndex = 7;
+            this.dgvAppointments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAppointments.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgvAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAppointments.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvAppointments.Location = new System.Drawing.Point(0, 105);
+            this.dgvAppointments.Name = "dgvAppointments";
+            this.dgvAppointments.Size = new System.Drawing.Size(1155, 383);
+            this.dgvAppointments.TabIndex = 7;
             // 
             // tableLayoutPanel1
             // 
@@ -112,11 +112,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1155, 488);
-            this.Controls.Add(this.dgvDisplayAppointments);
+            this.Controls.Add(this.dgvAppointments);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Report2";
             this.Text = "User Schedule - Report";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDisplayAppointments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -125,7 +125,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvDisplayAppointments;
+        private System.Windows.Forms.DataGridView dgvAppointments;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label lblSelectUser;
         private System.Windows.Forms.Button btnFindAppointments;

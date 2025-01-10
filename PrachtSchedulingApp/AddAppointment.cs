@@ -21,6 +21,8 @@ namespace PrachtSchedulingApp
         public AddAppointment(ManageAppointments manageAppointments = null)
         {
             InitializeComponent();
+            PopulateCustomerComboBox();
+            PopulateUserComboBox();
             _manageAppointments = manageAppointments;
 
             // this adds time selection to the datetimepickers
@@ -28,11 +30,6 @@ namespace PrachtSchedulingApp
             dtpEnd.CustomFormat = "MM/dd/yyyy hh:mm tt"; // 12-hour format
         }
 
-        private void AddAppointment_Load(object sender, EventArgs e)
-        {
-            PopulateCustomerComboBox();
-            PopulateUserComboBox();
-        }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -155,9 +152,6 @@ namespace PrachtSchedulingApp
             }
         }
 
-
-
-
         private bool IsAppointmentOverlapping(DateTime start, DateTime end, int customerId)
         {
             // this checks to see if the customer selected already has an appt on this day/time.
@@ -191,63 +185,20 @@ namespace PrachtSchedulingApp
             }
         }
 
-
         private void btnAddNewCustomer_Click(object sender, EventArgs e)
         {
             // Will come back and edit this when the Customer forms are done.
             MessageBox.Show($"This doesn't exist yet! Pardon my dust.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
         private void PopulateCustomerComboBox()
         {
-            // This will populate the ComboBox that allows users to select a customer from the db.
-            try
-            {
-                string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
-                MySqlConnection con = new MySqlConnection(connectionString);
-                con.Open();
-                string query = "SELECT customerId, customerName FROM customer WHERE active = 1";
-                MySqlCommand cmd = new MySqlCommand(query, con);
-                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-
-                DataTable customerComboBox = new DataTable();
-                adapter.Fill(customerComboBox);
-
-                cboCustomer.DisplayMember = "customerName";
-                cboCustomer.ValueMember = "customerId";
-
-                cboCustomer.DataSource = customerComboBox;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            string query = "SELECT customerId, customerName FROM customer WHERE active = 1";
+            DatabaseHelper.PopulateCustomerComboBox(cboCustomer, query, "customerName", "customerId");
         }
-
         private void PopulateUserComboBox()
         {
-            // This will populate the ComboBox that allows users to select a customer from the db.
-            try
-            {
-                string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
-                MySqlConnection con = new MySqlConnection(connectionString);
-                con.Open();
-                string query = "SELECT userId, userName FROM user WHERE active = 1";
-                MySqlCommand cmd = new MySqlCommand(query, con);
-                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-
-                DataTable customerComboBox = new DataTable();
-                adapter.Fill(customerComboBox);
-
-                cboUser.DisplayMember = "userName";
-                cboUser.ValueMember = "userId";
-
-                cboUser.DataSource = customerComboBox;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            string query = "SELECT userId, userName FROM user WHERE active = 1";
+            DatabaseHelper.PopulateUserComboBox(cboUser, query, "userName", "userId");
         }
     }
 }

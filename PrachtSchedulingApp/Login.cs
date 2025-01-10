@@ -27,6 +27,42 @@ namespace PrachtSchedulingApp
             InitializeComponent();
         }
 
+        // This determines the language based on the system's culture
+        private string GetLanguageBasedOnRegion()
+        {
+            // Get the current culture info
+            var culture = System.Globalization.CultureInfo.CurrentCulture;
+
+            // Check if the region is Mexico (es-MX) and return the appropriate language
+            if (culture.Name == "es-MX")
+                return "Spanish";
+            return "English"; // Default to English
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            // Determine the language
+            string language = GetLanguageBasedOnRegion();
+
+            // Update UI elements based on language
+            if (language == "Spanish")
+            {
+                this.Text = "Iniciar sesión";
+                lblUsername.Text = "Nombre de usuario";
+                lblPassword.Text = "Contraseña";
+                btnLogin.Text = "Iniciar sesión";
+                btnCreateAccount.Text = "Crear cuenta";
+            }
+            else
+            {
+                this.Text = "Login";
+                lblUsername.Text = "Username";
+                lblPassword.Text = "Password";
+                btnLogin.Text = "Login";
+                btnCreateAccount.Text = "Create Account";
+            }
+        }
+
         // This checks the database to match the user/pw combo 
         private (bool isValid, int userId) ValidateLogin(string username, string password)
         {
@@ -162,18 +198,6 @@ namespace PrachtSchedulingApp
             public static int UserId { get; set; }
         }
 
-        // This determines the language based on the system's culture
-        private string GetLanguageBasedOnRegion()
-        {
-            // Get the current culture info
-            var culture = System.Globalization.CultureInfo.CurrentCulture;
-
-            // Check if the region is Mexico (es-MX) and return the appropriate language
-            if (culture.Name == "es-MX")
-                return "Spanish";
-            return "English"; // Default to English
-        }
-
         // This stores the messages for the translation
         private Dictionary<string, (string English, string Spanish)> Messages = new Dictionary<string, (string English, string Spanish)>()
         {
@@ -181,11 +205,6 @@ namespace PrachtSchedulingApp
             { "LoginFailed", ("The username and password do not match.", "El nombre de usuario y la contraseña no coinciden.") },
             { "ErrorOccurred", ("An error occurred: {0}", "Ocurrió un error: {0}") }
         };
-
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-        }
 
         private void btnCreateAccount_Click(object sender, EventArgs e)
         {
