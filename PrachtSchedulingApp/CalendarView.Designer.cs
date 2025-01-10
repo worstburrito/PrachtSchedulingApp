@@ -48,12 +48,12 @@
             this.tableLayoutPanel1.Controls.Add(this.btnFindAppointments, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnReset, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 10);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 74);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1164, 74);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // dateTimePicker
@@ -77,7 +77,7 @@
             // btnFindAppointments
             // 
             this.btnFindAppointments.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.btnFindAppointments.Location = new System.Drawing.Point(595, 3);
+            this.btnFindAppointments.Location = new System.Drawing.Point(585, 3);
             this.btnFindAppointments.Name = "btnFindAppointments";
             this.btnFindAppointments.Size = new System.Drawing.Size(190, 31);
             this.btnFindAppointments.TabIndex = 1;
@@ -88,7 +88,7 @@
             // btnReset
             // 
             this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.btnReset.Location = new System.Drawing.Point(595, 40);
+            this.btnReset.Location = new System.Drawing.Point(585, 40);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(190, 31);
             this.btnReset.TabIndex = 4;
@@ -102,19 +102,20 @@
             this.dgvAppointments.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAppointments.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvAppointments.Location = new System.Drawing.Point(0, 78);
+            this.dgvAppointments.Location = new System.Drawing.Point(10, 102);
             this.dgvAppointments.Name = "dgvAppointments";
-            this.dgvAppointments.Size = new System.Drawing.Size(1184, 383);
+            this.dgvAppointments.Size = new System.Drawing.Size(1164, 383);
             this.dgvAppointments.TabIndex = 5;
             // 
             // CalendarView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 461);
+            this.ClientSize = new System.Drawing.Size(1184, 495);
             this.Controls.Add(this.dgvAppointments);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "CalendarView";
+            this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "Calendar View";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

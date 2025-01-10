@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSubmit = new System.Windows.Forms.Button();
+            this.cboUser = new System.Windows.Forms.ComboBox();
+            this.lblUser = new System.Windows.Forms.Label();
             this.lblCustomer = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblDesc = new System.Windows.Forms.Label();
@@ -48,9 +51,6 @@
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.btnAddNewCustomer = new System.Windows.Forms.Button();
-            this.btnSubmit = new System.Windows.Forms.Button();
-            this.lblUser = new System.Windows.Forms.Label();
-            this.cboUser = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,8 +58,9 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.83274F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.89324F));
+            this.tableLayoutPanel1.Controls.Add(this.btnSubmit, 1, 10);
             this.tableLayoutPanel1.Controls.Add(this.cboUser, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblUser, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblCustomer, 0, 0);
@@ -82,26 +83,55 @@
             this.tableLayoutPanel1.Controls.Add(this.dtpEnd, 1, 9);
             this.tableLayoutPanel1.Controls.Add(this.btnAddNewCustomer, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 10);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 10;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(584, 378);
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(1);
+            this.tableLayoutPanel1.RowCount = 11;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(564, 378);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // btnSubmit
+            // 
+            this.btnSubmit.Location = new System.Drawing.Point(191, 344);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(182, 30);
+            this.btnSubmit.TabIndex = 1;
+            this.btnSubmit.Text = "Schedule";
+            this.btnSubmit.UseVisualStyleBackColor = true;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            // 
+            // cboUser
+            // 
+            this.cboUser.FormattingEnabled = true;
+            this.cboUser.Location = new System.Drawing.Point(191, 38);
+            this.cboUser.Name = "cboUser";
+            this.cboUser.Size = new System.Drawing.Size(182, 21);
+            this.cboUser.TabIndex = 22;
+            // 
+            // lblUser
+            // 
+            this.lblUser.AutoSize = true;
+            this.lblUser.Location = new System.Drawing.Point(4, 35);
+            this.lblUser.Name = "lblUser";
+            this.lblUser.Size = new System.Drawing.Size(29, 13);
+            this.lblUser.TabIndex = 21;
+            this.lblUser.Text = "User";
             // 
             // lblCustomer
             // 
             this.lblCustomer.AutoSize = true;
-            this.lblCustomer.Location = new System.Drawing.Point(3, 0);
+            this.lblCustomer.Location = new System.Drawing.Point(4, 1);
             this.lblCustomer.Name = "lblCustomer";
             this.lblCustomer.Size = new System.Drawing.Size(51, 13);
             this.lblCustomer.TabIndex = 0;
@@ -110,7 +140,7 @@
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Location = new System.Drawing.Point(3, 74);
+            this.lblTitle.Location = new System.Drawing.Point(4, 69);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(89, 13);
             this.lblTitle.TabIndex = 2;
@@ -119,7 +149,7 @@
             // lblDesc
             // 
             this.lblDesc.AutoSize = true;
-            this.lblDesc.Location = new System.Drawing.Point(3, 111);
+            this.lblDesc.Location = new System.Drawing.Point(4, 103);
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.Size = new System.Drawing.Size(122, 13);
             this.lblDesc.TabIndex = 3;
@@ -128,7 +158,7 @@
             // lblLocation
             // 
             this.lblLocation.AutoSize = true;
-            this.lblLocation.Location = new System.Drawing.Point(3, 148);
+            this.lblLocation.Location = new System.Drawing.Point(4, 137);
             this.lblLocation.Name = "lblLocation";
             this.lblLocation.Size = new System.Drawing.Size(48, 13);
             this.lblLocation.TabIndex = 4;
@@ -137,7 +167,7 @@
             // lblContact
             // 
             this.lblContact.AutoSize = true;
-            this.lblContact.Location = new System.Drawing.Point(3, 185);
+            this.lblContact.Location = new System.Drawing.Point(4, 171);
             this.lblContact.Name = "lblContact";
             this.lblContact.Size = new System.Drawing.Size(44, 13);
             this.lblContact.TabIndex = 5;
@@ -146,7 +176,7 @@
             // lblType
             // 
             this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(3, 222);
+            this.lblType.Location = new System.Drawing.Point(4, 205);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(105, 13);
             this.lblType.TabIndex = 6;
@@ -155,7 +185,7 @@
             // lblURL
             // 
             this.lblURL.AutoSize = true;
-            this.lblURL.Location = new System.Drawing.Point(3, 259);
+            this.lblURL.Location = new System.Drawing.Point(4, 239);
             this.lblURL.Name = "lblURL";
             this.lblURL.Size = new System.Drawing.Size(29, 13);
             this.lblURL.TabIndex = 7;
@@ -164,7 +194,7 @@
             // lblStart
             // 
             this.lblStart.AutoSize = true;
-            this.lblStart.Location = new System.Drawing.Point(3, 296);
+            this.lblStart.Location = new System.Drawing.Point(4, 273);
             this.lblStart.Name = "lblStart";
             this.lblStart.Size = new System.Drawing.Size(29, 13);
             this.lblStart.TabIndex = 8;
@@ -173,7 +203,7 @@
             // lblEnd
             // 
             this.lblEnd.AutoSize = true;
-            this.lblEnd.Location = new System.Drawing.Point(3, 333);
+            this.lblEnd.Location = new System.Drawing.Point(4, 307);
             this.lblEnd.Name = "lblEnd";
             this.lblEnd.Size = new System.Drawing.Size(26, 13);
             this.lblEnd.TabIndex = 9;
@@ -182,115 +212,87 @@
             // cboCustomer
             // 
             this.cboCustomer.FormattingEnabled = true;
-            this.cboCustomer.Location = new System.Drawing.Point(197, 3);
+            this.cboCustomer.Location = new System.Drawing.Point(191, 4);
             this.cboCustomer.Name = "cboCustomer";
-            this.cboCustomer.Size = new System.Drawing.Size(188, 21);
+            this.cboCustomer.Size = new System.Drawing.Size(182, 21);
             this.cboCustomer.TabIndex = 10;
             // 
             // txtTitle
             // 
-            this.txtTitle.Location = new System.Drawing.Point(197, 77);
+            this.txtTitle.Location = new System.Drawing.Point(191, 72);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(188, 20);
+            this.txtTitle.Size = new System.Drawing.Size(182, 20);
             this.txtTitle.TabIndex = 12;
             // 
             // txtDesc
             // 
-            this.txtDesc.Location = new System.Drawing.Point(197, 114);
+            this.txtDesc.Location = new System.Drawing.Point(191, 106);
             this.txtDesc.Name = "txtDesc";
-            this.txtDesc.Size = new System.Drawing.Size(188, 20);
+            this.txtDesc.Size = new System.Drawing.Size(182, 20);
             this.txtDesc.TabIndex = 13;
             // 
             // txtLocation
             // 
-            this.txtLocation.Location = new System.Drawing.Point(197, 151);
+            this.txtLocation.Location = new System.Drawing.Point(191, 140);
             this.txtLocation.Name = "txtLocation";
-            this.txtLocation.Size = new System.Drawing.Size(188, 20);
+            this.txtLocation.Size = new System.Drawing.Size(182, 20);
             this.txtLocation.TabIndex = 14;
             // 
             // txtContact
             // 
-            this.txtContact.Location = new System.Drawing.Point(197, 188);
+            this.txtContact.Location = new System.Drawing.Point(191, 174);
             this.txtContact.Name = "txtContact";
-            this.txtContact.Size = new System.Drawing.Size(188, 20);
+            this.txtContact.Size = new System.Drawing.Size(182, 20);
             this.txtContact.TabIndex = 15;
             // 
             // txtType
             // 
-            this.txtType.Location = new System.Drawing.Point(197, 225);
+            this.txtType.Location = new System.Drawing.Point(191, 208);
             this.txtType.Name = "txtType";
-            this.txtType.Size = new System.Drawing.Size(188, 20);
+            this.txtType.Size = new System.Drawing.Size(182, 20);
             this.txtType.TabIndex = 16;
             // 
             // txtURL
             // 
-            this.txtURL.Location = new System.Drawing.Point(197, 262);
+            this.txtURL.Location = new System.Drawing.Point(191, 242);
             this.txtURL.Name = "txtURL";
-            this.txtURL.Size = new System.Drawing.Size(188, 20);
+            this.txtURL.Size = new System.Drawing.Size(182, 20);
             this.txtURL.TabIndex = 17;
             // 
             // dtpStart
             // 
             this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpStart.Location = new System.Drawing.Point(197, 299);
+            this.dtpStart.Location = new System.Drawing.Point(191, 276);
             this.dtpStart.Name = "dtpStart";
-            this.dtpStart.Size = new System.Drawing.Size(188, 20);
+            this.dtpStart.Size = new System.Drawing.Size(182, 20);
             this.dtpStart.TabIndex = 18;
             // 
             // dtpEnd
             // 
             this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpEnd.Location = new System.Drawing.Point(197, 336);
+            this.dtpEnd.Location = new System.Drawing.Point(191, 310);
             this.dtpEnd.Name = "dtpEnd";
-            this.dtpEnd.Size = new System.Drawing.Size(188, 20);
+            this.dtpEnd.Size = new System.Drawing.Size(182, 20);
             this.dtpEnd.TabIndex = 19;
             // 
             // btnAddNewCustomer
             // 
-            this.btnAddNewCustomer.Location = new System.Drawing.Point(391, 3);
+            this.btnAddNewCustomer.Location = new System.Drawing.Point(397, 4);
             this.btnAddNewCustomer.Name = "btnAddNewCustomer";
-            this.btnAddNewCustomer.Size = new System.Drawing.Size(143, 23);
+            this.btnAddNewCustomer.Size = new System.Drawing.Size(143, 28);
             this.btnAddNewCustomer.TabIndex = 20;
             this.btnAddNewCustomer.Text = "Add New Customer";
             this.btnAddNewCustomer.UseVisualStyleBackColor = true;
             this.btnAddNewCustomer.Click += new System.EventHandler(this.btnAddNewCustomer_Click);
             // 
-            // btnSubmit
-            // 
-            this.btnSubmit.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnSubmit.Location = new System.Drawing.Point(0, 436);
-            this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(584, 23);
-            this.btnSubmit.TabIndex = 1;
-            this.btnSubmit.Text = "Schedule";
-            this.btnSubmit.UseVisualStyleBackColor = true;
-            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
-            // 
-            // lblUser
-            // 
-            this.lblUser.AutoSize = true;
-            this.lblUser.Location = new System.Drawing.Point(3, 37);
-            this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(29, 13);
-            this.lblUser.TabIndex = 21;
-            this.lblUser.Text = "User";
-            // 
-            // cboUser
-            // 
-            this.cboUser.FormattingEnabled = true;
-            this.cboUser.Location = new System.Drawing.Point(197, 40);
-            this.cboUser.Name = "cboUser";
-            this.cboUser.Size = new System.Drawing.Size(188, 21);
-            this.cboUser.TabIndex = 22;
-            // 
             // AddAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 459);
-            this.Controls.Add(this.btnSubmit);
+            this.ClientSize = new System.Drawing.Size(584, 398);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "AddAppointment";
+            this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "Add New Appointment";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

@@ -35,7 +35,9 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnCreateAccount = new System.Windows.Forms.Button();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -47,13 +49,12 @@
             this.tableLayoutPanel1.Controls.Add(this.lblPassword, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtUsername, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtPassword, 1, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 10);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(380, 112);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(376, 112);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lblUsername
@@ -76,14 +77,14 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(110, 3);
+            this.txtUsername.Location = new System.Drawing.Point(109, 3);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(180, 20);
             this.txtUsername.TabIndex = 2;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(110, 59);
+            this.txtPassword.Location = new System.Drawing.Point(109, 59);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(180, 20);
@@ -91,10 +92,9 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnLogin.Location = new System.Drawing.Point(0, 103);
+            this.btnLogin.Location = new System.Drawing.Point(5, 5);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(380, 43);
+            this.btnLogin.Size = new System.Drawing.Size(180, 38);
             this.btnLogin.TabIndex = 1;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -102,29 +102,46 @@
             // 
             // btnCreateAccount
             // 
-            this.btnCreateAccount.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnCreateAccount.Location = new System.Drawing.Point(0, 146);
+            this.btnCreateAccount.Location = new System.Drawing.Point(191, 5);
             this.btnCreateAccount.Name = "btnCreateAccount";
-            this.btnCreateAccount.Size = new System.Drawing.Size(380, 43);
+            this.btnCreateAccount.Size = new System.Drawing.Size(180, 38);
             this.btnCreateAccount.TabIndex = 2;
             this.btnCreateAccount.Text = "Create Account";
             this.btnCreateAccount.UseVisualStyleBackColor = true;
             this.btnCreateAccount.Click += new System.EventHandler(this.btnCreateAccount_Click);
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.btnLogin, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnCreateAccount, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 148);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.Padding = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(376, 48);
+            this.tableLayoutPanel2.TabIndex = 3;
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 189);
-            this.Controls.Add(this.btnLogin);
+            this.ClientSize = new System.Drawing.Size(396, 206);
+            this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.btnCreateAccount);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.Name = "Login";
+            this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -138,5 +155,6 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnCreateAccount;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     }
 }
