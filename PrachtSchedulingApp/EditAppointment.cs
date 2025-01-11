@@ -38,19 +38,16 @@ namespace PrachtSchedulingApp
             LoadAppointmentData();
         }
 
-        // Submit button 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             try
             {
-                // Validate combo box selections
                 if (cboCustomer.SelectedValue == null || cboUser.SelectedValue == null)
                 {
                     MessageBox.Show("Please select valid values for customer and user.", "Missing Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Attempt to parse SelectedValue as integers
                 if (!int.TryParse(cboCustomer.SelectedValue.ToString(), out int customerId) ||
                     !int.TryParse(cboUser.SelectedValue.ToString(), out int selectedUserId))
                 {
@@ -58,7 +55,6 @@ namespace PrachtSchedulingApp
                     return;
                 }
 
-                // Gather other values from the form
                 int currentUserId = CurrentUser.UserId;
                 string title = txtTitle.Text.Trim();
                 string description = txtDesc.Text.Trim();
@@ -77,11 +73,9 @@ namespace PrachtSchedulingApp
                     return;
                 }
 
-                // Convert start and end to UTC for storage
                 DateTime startUTC = start.ToUniversalTime();
                 DateTime endUTC = end.ToUniversalTime();
 
-                // Check if end date is earlier than start date
                 if (startUTC >= endUTC)
                 {
                     MessageBox.Show("End date cannot be earlier than or equal to the start date.", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -114,15 +108,13 @@ namespace PrachtSchedulingApp
                     return;
                 }
 
-                // Check for overlapping appointments
-                if (IsAppointmentOverlapping(startUTC, endUTC, customerId))
+                if (IsAppointmentOverlapping(startUTC, endUTC, customerId, selectedUserId))
                 {
-                    MessageBox.Show("The selected time slot overlaps with an existing appointment. Please choose a different time.",
+                    MessageBox.Show("The selected time slot overlaps with an existing appointment for the customer or user. Please choose a different time.",
                         "Overlapping Appointment", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Validate connection string
                 string connectionString = ConfigurationManager.ConnectionStrings["localdb"]?.ConnectionString;
                 if (string.IsNullOrEmpty(connectionString))
                 {
@@ -130,7 +122,6 @@ namespace PrachtSchedulingApp
                     return;
                 }
 
-                // Update appointment in the database
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
                 {
                     conn.Open();
@@ -187,40 +178,30 @@ namespace PrachtSchedulingApp
             }
         }
 
-
-        // this will load the appointment data from the passed appointmentid
         private void LoadAppointmentData()
         {
-            // Retrieve the connection string from ConfigurationManager
             string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
 
-            // Establish connection to the database
             using (MySqlConnection con = new MySqlConnection(connectionString))
             {
                 try
                 {
-                    con.Open(); // Open the connection
+                    con.Open(); 
 
-                    // SQL query to fetch data for the selected appointment
                     string query = "SELECT * FROM appointment WHERE appointmentId = @appointmentId";
 
-                    // Create a MySqlCommand with the query and connection
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
-                        // Add the parameter for appointmentId
                         cmd.Parameters.AddWithValue("@appointmentId", _appointmentId);
 
-                        // Use a DataAdapter to execute the query and fill the data
                         MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                         DataTable appointmentData = new DataTable();
                         adapter.Fill(appointmentData);
 
-                        // Check if any data was retrieved
                         if (appointmentData.Rows.Count > 0)
                         {
                             DataRow row = appointmentData.Rows[0];
 
-                            // Populate the form controls with data
                             cboCustomer.SelectedValue = row["customerId"];
                             cboUser.SelectedValue = row["userId"];
                             txtTitle.Text = row["title"].ToString();
@@ -230,18 +211,16 @@ namespace PrachtSchedulingApp
                             txtType.Text = row["type"].ToString();
                             txtURL.Text = row["url"].ToString();
 
-                            // Set the DateTime pickers to the local time
                             DateTime startTime = Convert.ToDateTime(row["start"]).ToLocalTime();
                             DateTime endTime = Convert.ToDateTime(row["end"]).ToLocalTime();
 
-                            // Assign the local times to the DateTimePicker controls
                             dtpStart.Value = startTime;
                             dtpEnd.Value = endTime;
                         }
                         else
                         {
                             MessageBox.Show($"Appointment not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            Close(); // Close the form if no data is found
+                            Close(); 
                         }
                     }
                 }
@@ -252,32 +231,63 @@ namespace PrachtSchedulingApp
             }
         }
 
-        // this checks if the appointment being edited overlaps with an existing customer appointment
-        private bool IsAppointmentOverlapping(DateTime start, DateTime end, int customerId)
+        private bool IsAppointmentOverlapping(DateTime start, DateTime end, int customerId, int userId)
         {
-            // Query the database to check for overlapping appointments
             string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
-            MySqlConnection con = new MySqlConnection(connectionString);
-            con.Open();
 
-            string query = @"
-        SELECT COUNT(*) FROM appointment 
-        WHERE customerId = @customerId 
-        AND appointmentId != @appointmentId
-        AND ((start BETWEEN @start AND @end) OR (end BETWEEN @start AND @end) OR (@start BETWEEN start AND end) OR (@end BETWEEN start AND end));";
+            using (MySqlConnection con = new MySqlConnection(connectionString))
+            {
+                con.Open();
 
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@customerId", customerId);
-            cmd.Parameters.AddWithValue("@appointmentId", _appointmentId);
-            cmd.Parameters.AddWithValue("@start", start);
-            cmd.Parameters.AddWithValue("@end", end);
+                string queryCustomerOverlap = @"
+                SELECT COUNT(*) FROM appointment 
+                WHERE customerId = @customerId
+                AND appointmentId != @appointmentId
+                AND ((start BETWEEN @start AND @end) 
+                     OR (end BETWEEN @start AND @end) 
+                     OR (@start BETWEEN start AND end) 
+                     OR (@end BETWEEN start AND end));";
 
-            int overlappingAppointments = Convert.ToInt32(cmd.ExecuteScalar());
+                using (MySqlCommand cmdCustomer = new MySqlCommand(queryCustomerOverlap, con))
+                {
+                    cmdCustomer.Parameters.AddWithValue("@customerId", customerId);
+                    cmdCustomer.Parameters.AddWithValue("@appointmentId", _appointmentId);
+                    cmdCustomer.Parameters.AddWithValue("@start", start);
+                    cmdCustomer.Parameters.AddWithValue("@end", end);
 
-            return overlappingAppointments > 0;
+                    int customerOverlapCount = Convert.ToInt32(cmdCustomer.ExecuteScalar());
+                    if (customerOverlapCount > 0)
+                    {
+                        return true; 
+                    }
+                }
+
+                string queryUserOverlap = @"
+                SELECT COUNT(*) FROM appointment 
+                WHERE userId = @userId
+                AND appointmentId != @appointmentId
+                AND ((start BETWEEN @start AND @end) 
+                     OR (end BETWEEN @start AND @end) 
+                     OR (@start BETWEEN start AND end) 
+                     OR (@end BETWEEN start AND end));";
+
+                using (MySqlCommand cmdUser = new MySqlCommand(queryUserOverlap, con))
+                {
+                    cmdUser.Parameters.AddWithValue("@userId", userId);
+                    cmdUser.Parameters.AddWithValue("@appointmentId", _appointmentId);
+                    cmdUser.Parameters.AddWithValue("@start", start);
+                    cmdUser.Parameters.AddWithValue("@end", end);
+
+                    int userOverlapCount = Convert.ToInt32(cmdUser.ExecuteScalar());
+                    if (userOverlapCount > 0)
+                    {
+                        return true; 
+                    }
+                }
+            }
+            return false; 
         }
 
-        // this will populate the customer combobox
         private void PopulateCustomerComboBox()
         {
             string query = "SELECT customerId, customerName FROM customer WHERE active = 1";
