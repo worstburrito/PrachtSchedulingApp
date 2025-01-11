@@ -81,13 +81,17 @@ namespace PrachtSchedulingApp
                 try
                 {
                     TimeZoneInfo estZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-                    DateTime startEST = TimeZoneInfo.ConvertTime(start, estZone);
-                    DateTime endEST = TimeZoneInfo.ConvertTime(end, estZone);
+
+                    DateTime startEST = TimeZoneInfo.ConvertTimeFromUtc(start.ToUniversalTime(), estZone);
+                    DateTime endEST = TimeZoneInfo.ConvertTimeFromUtc(end.ToUniversalTime(), estZone);
+
+                    bool isDST = estZone.IsDaylightSavingTime(startEST);
+                    string dstMessage = isDST ? " (Daylight Savings Time applies)" : "";
 
                     if (startEST.DayOfWeek == DayOfWeek.Saturday || startEST.DayOfWeek == DayOfWeek.Sunday ||
                         startEST < startEST.Date.AddHours(9) || endEST > endEST.Date.AddHours(17))
                     {
-                        MessageBox.Show("Appointments must be scheduled between 9:00 AM and 5:00 PM, Monday–Friday, Eastern Standard Time.",
+                        MessageBox.Show($"Appointments must be scheduled between 9:00 AM and 5:00 PM, Monday–Friday, Eastern Time{dstMessage}.",
                             "Invalid Time", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
@@ -95,6 +99,11 @@ namespace PrachtSchedulingApp
                 catch (TimeZoneNotFoundException)
                 {
                     MessageBox.Show("The system's time zone configuration is invalid or unsupported.", "Time Zone Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                catch (InvalidTimeZoneException)
+                {
+                    MessageBox.Show("The system encountered an issue while processing time zone information.", "Time Zone Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
