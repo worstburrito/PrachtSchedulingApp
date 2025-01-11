@@ -57,15 +57,15 @@ namespace PrachtSchedulingApp
                         u2.userName AS LastUpdatedBy
                     FROM 
                         appointment a
-                    JOIN 
+                    LEFT JOIN 
                         customer c ON a.customerId = c.customerId
-                    JOIN 
+                    LEFT JOIN 
                         user u1 ON a.userId = u1.userId
-                    JOIN 
+                    LEFT JOIN 
                         user u2 ON a.lastUpdateBy = u2.userId
-                    JOIN 
+                    LEFT JOIN 
                         user u3 ON a.createdBy = u3.userId
-                    WHERE 
+                    WHERE
                         u1.userName = @user
                     ORDER BY
                         a.start;";
@@ -146,13 +146,13 @@ namespace PrachtSchedulingApp
                 u2.userName AS LastUpdatedBy
             FROM 
                 appointment a
-            JOIN 
+            LEFT JOIN 
                 customer c ON a.customerId = c.customerId
-            JOIN 
+            LEFT JOIN 
                 user u1 ON a.userId = u1.userId
-            JOIN 
+            LEFT JOIN 
                 user u2 ON a.lastUpdateBy = u2.userId
-            JOIN 
+            LEFT JOIN 
                 user u3 ON a.createdBy = u3.userId
             ORDER BY
                 a.start;";

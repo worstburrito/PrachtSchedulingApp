@@ -144,34 +144,35 @@ namespace PrachtSchedulingApp
             {
                 con.Open();
                 string query = @"
-            SELECT 
-                a.appointmentId,
-                c.customerName AS CustomerName,
-                u1.userName AS UserName,
-                a.title,
-                a.description,
-                a.location,
-                a.contact,
-                a.type,
-                a.url,
-                a.start,
-                a.end,
-                a.createDate,
-                u3.userName AS CreatedBy,
-                a.lastUpdate,
-                u2.userName AS LastUpdatedBy
-            FROM 
-                appointment a
-            JOIN 
-                customer c ON a.customerId = c.customerId
-            JOIN 
-                user u1 ON a.userId = u1.userId
-            JOIN 
-                user u2 ON a.lastUpdateBy = u2.userId
-            JOIN 
-                user u3 ON a.createdBy = u3.userId
-            ORDER BY
-                a.start;";
+                SELECT 
+                    a.appointmentId,
+                    c.customerName AS CustomerName,
+                    u1.userName AS UserName,
+                    a.title,
+                    a.description,
+                    a.location,
+                    a.contact,
+                    a.type,
+                    a.url,
+                    a.start,
+                    a.end,
+                    a.createDate,
+                    u3.userName AS CreatedBy,
+                    a.lastUpdate,
+                    u2.userName AS LastUpdatedBy
+                FROM 
+                    appointment a
+                LEFT JOIN 
+                    customer c ON a.customerId = c.customerId
+                LEFT JOIN 
+                    user u1 ON a.userId = u1.userId
+                LEFT JOIN 
+                    user u2 ON a.lastUpdateBy = u2.userId
+                LEFT JOIN 
+                    user u3 ON a.createdBy = u3.userId
+                ORDER BY
+                    a.start;";
+
 
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))

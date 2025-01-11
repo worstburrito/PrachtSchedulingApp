@@ -30,11 +30,7 @@
         {
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.manageCustomerRecords = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewCustomerRecords = new System.Windows.Forms.ToolStripMenuItem();
-            this.addCustomerRecords = new System.Windows.Forms.ToolStripMenuItem();
             this.manageAppointments = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewAllAppointments = new System.Windows.Forms.ToolStripMenuItem();
-            this.addAppointment = new System.Windows.Forms.ToolStripMenuItem();
             this.viewSchedule = new System.Windows.Forms.ToolStripMenuItem();
             this.runReport = new System.Windows.Forms.ToolStripMenuItem();
             this.Report1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,49 +60,17 @@
             // 
             // manageCustomerRecords
             // 
-            this.manageCustomerRecords.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewCustomerRecords,
-            this.addCustomerRecords});
             this.manageCustomerRecords.Name = "manageCustomerRecords";
             this.manageCustomerRecords.Size = new System.Drawing.Size(162, 22);
             this.manageCustomerRecords.Text = "Manage Customer Records";
-            // 
-            // viewCustomerRecords
-            // 
-            this.viewCustomerRecords.Name = "viewCustomerRecords";
-            this.viewCustomerRecords.Size = new System.Drawing.Size(199, 22);
-            this.viewCustomerRecords.Text = "View Customer Records";
-            this.viewCustomerRecords.Click += new System.EventHandler(this.viewCustomerRecords_Click);
-            // 
-            // addCustomerRecords
-            // 
-            this.addCustomerRecords.Name = "addCustomerRecords";
-            this.addCustomerRecords.Size = new System.Drawing.Size(199, 22);
-            this.addCustomerRecords.Text = "Add Customer Record";
-            this.addCustomerRecords.Click += new System.EventHandler(this.addCustomerRecords_Click);
+            this.manageCustomerRecords.Click += new System.EventHandler(this.manageCustomerRecords_Click);
             // 
             // manageAppointments
             // 
-            this.manageAppointments.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewAllAppointments,
-            this.addAppointment});
             this.manageAppointments.Name = "manageAppointments";
             this.manageAppointments.Size = new System.Drawing.Size(141, 22);
             this.manageAppointments.Text = "Manage Appointments";
-            // 
-            // viewAllAppointments
-            // 
-            this.viewAllAppointments.Name = "viewAllAppointments";
-            this.viewAllAppointments.Size = new System.Drawing.Size(195, 22);
-            this.viewAllAppointments.Text = "View All Appointments";
-            this.viewAllAppointments.Click += new System.EventHandler(this.viewAllAppointments_Click);
-            // 
-            // addAppointment
-            // 
-            this.addAppointment.Name = "addAppointment";
-            this.addAppointment.Size = new System.Drawing.Size(195, 22);
-            this.addAppointment.Text = "Add Appointment";
-            this.addAppointment.Click += new System.EventHandler(this.addAppointment_Click);
+            this.manageAppointments.Click += new System.EventHandler(this.manageAppointments_Click);
             // 
             // viewSchedule
             // 
@@ -200,11 +164,7 @@
 
         private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem manageCustomerRecords;
-        private System.Windows.Forms.ToolStripMenuItem viewCustomerRecords;
-        private System.Windows.Forms.ToolStripMenuItem addCustomerRecords;
         private System.Windows.Forms.ToolStripMenuItem manageAppointments;
-        private System.Windows.Forms.ToolStripMenuItem viewAllAppointments;
-        private System.Windows.Forms.ToolStripMenuItem addAppointment;
         private System.Windows.Forms.ToolStripMenuItem viewSchedule;
         private System.Windows.Forms.ToolStripMenuItem runReport;
         private System.Windows.Forms.ToolStripMenuItem Report1;

@@ -53,26 +53,26 @@ namespace PrachtSchedulingApp
             {
                 con.Open();
                 string query = @"
-                    SELECT
-                        c.customerId,
-                        c.customerName,
-                        a.address AS customerAddress,
-                        a.address2 AS customerAddress2,
-                        a.postalCode AS postalCode,
-                        a.phone AS phone,
-                        ci.city AS cityName,
-                        co.country AS countryName,
-                        CAST(c.active AS CHAR) as active,
-                        c.createDate,
-                        cu.userName AS createdBy,
-                        lu.userName AS lastUpdateBy,
-                        c.lastUpdate
-                    FROM customer c
-                    JOIN address a ON c.addressId = a.addressId
-                    JOIN city ci ON a.cityId = ci.cityId
-                    JOIN country co ON ci.countryId = co.countryId
-                    JOIN `user` cu ON c.createdBy = cu.userId
-                    JOIN `user` lu ON c.lastUpdateBy = lu.userId";
+                SELECT
+                    c.customerId,
+                    c.customerName,
+                    a.address AS customerAddress,
+                    a.address2 AS customerAddress2,
+                    a.postalCode AS postalCode,
+                    a.phone AS phone,
+                    ci.city AS cityName,
+                    co.country AS countryName,
+                    CAST(c.active AS CHAR) as active,
+                    c.createDate,
+                    cu.userName AS createdBy,
+                    lu.userName AS lastUpdateBy,
+                    c.lastUpdate
+                FROM customer c
+                LEFT JOIN address a ON c.addressId = a.addressId
+                LEFT JOIN city ci ON a.cityId = ci.cityId
+                LEFT JOIN country co ON ci.countryId = co.countryId
+                LEFT JOIN `user` cu ON c.createdBy = cu.userId
+                LEFT JOIN `user` lu ON c.lastUpdateBy = lu.userId;";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
@@ -103,7 +103,8 @@ namespace PrachtSchedulingApp
 
             int customerId = Convert.ToInt32(dgvManageCustomerRecords.SelectedRows[0].Cells["customerId"].Value);
             EditCustomer editCustomerForm = new EditCustomer(customerId, this);
-            editCustomerForm.ShowDialog();
+            editCustomerForm.MdiParent = this.MdiParent;
+            editCustomerForm.Show();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
