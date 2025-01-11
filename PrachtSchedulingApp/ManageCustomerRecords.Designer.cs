@@ -34,6 +34,7 @@
             this.btnDeactivate = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnActivate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvManageCustomerRecords)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +54,7 @@
             // 
             this.btnAdd.Location = new System.Drawing.Point(4, 4);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(267, 37);
+            this.btnAdd.Size = new System.Drawing.Size(212, 37);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add New Customer";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -61,9 +62,9 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(277, 4);
+            this.btnUpdate.Location = new System.Drawing.Point(222, 4);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(267, 37);
+            this.btnUpdate.Size = new System.Drawing.Size(212, 37);
             this.btnUpdate.TabIndex = 2;
             this.btnUpdate.Text = "Update Customer";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -71,9 +72,9 @@
             // 
             // btnDeactivate
             // 
-            this.btnDeactivate.Location = new System.Drawing.Point(550, 4);
+            this.btnDeactivate.Location = new System.Drawing.Point(658, 4);
             this.btnDeactivate.Name = "btnDeactivate";
-            this.btnDeactivate.Size = new System.Drawing.Size(267, 37);
+            this.btnDeactivate.Size = new System.Drawing.Size(212, 37);
             this.btnDeactivate.TabIndex = 3;
             this.btnDeactivate.Text = "Deactivate Customer";
             this.btnDeactivate.UseVisualStyleBackColor = true;
@@ -81,34 +82,45 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 4;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.Controls.Add(this.btnDelete, 3, 0);
+            this.tableLayoutPanel2.ColumnCount = 5;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.Controls.Add(this.btnActivate, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnAdd, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnUpdate, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnDeactivate, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnDelete, 4, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnDeactivate, 3, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 10);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.Padding = new System.Windows.Forms.Padding(1);
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1094, 52);
             this.tableLayoutPanel2.TabIndex = 5;
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(823, 4);
+            this.btnDelete.Location = new System.Drawing.Point(876, 4);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(267, 37);
+            this.btnDelete.Size = new System.Drawing.Size(214, 37);
             this.btnDelete.TabIndex = 4;
             this.btnDelete.Text = "Delete Customer";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnActivate
+            // 
+            this.btnActivate.Location = new System.Drawing.Point(440, 4);
+            this.btnActivate.Name = "btnActivate";
+            this.btnActivate.Size = new System.Drawing.Size(212, 37);
+            this.btnActivate.TabIndex = 5;
+            this.btnActivate.Text = "Activate Customer";
+            this.btnActivate.UseVisualStyleBackColor = true;
+            this.btnActivate.Click += new System.EventHandler(this.btnActivate_Click);
             // 
             // ManageCustomerRecords
             // 
@@ -134,5 +146,6 @@
         private System.Windows.Forms.Button btnDeactivate;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnActivate;
     }
 }

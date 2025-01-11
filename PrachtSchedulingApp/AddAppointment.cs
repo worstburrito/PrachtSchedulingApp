@@ -77,7 +77,12 @@ namespace PrachtSchedulingApp
                     return;
                 }
 
-                // Validate business hours in Eastern Standard Time
+                // Validate business hours in EST
+                // DEBUG: COMMENT OUT TO TEST
+                /* Create a function that generates an alert whenever
+                 * a user who has an appointment within 
+                 * 15 minutes logs in to their account.
+                 */
                 try
                 {
                     TimeZoneInfo estZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");

@@ -88,16 +88,29 @@ namespace PrachtSchedulingApp
                     return;
                 }
 
-                // Validate business hours (Eastern Standard Time)
-                TimeZoneInfo estZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-                DateTime startEST = TimeZoneInfo.ConvertTime(start, estZone);
-                DateTime endEST = TimeZoneInfo.ConvertTime(end, estZone);
-
-                if (startEST.DayOfWeek == DayOfWeek.Saturday || startEST.DayOfWeek == DayOfWeek.Sunday ||
-                    startEST < startEST.Date.AddHours(9) || endEST > endEST.Date.AddHours(17))
+                // Validate business hours in EST
+                // DEBUG: COMMENT OUT TO TEST
+                /* Create a function that generates an alert whenever
+                 * a user who has an appointment within 
+                 * 15 minutes logs in to their account.
+                 */
+                try
                 {
-                    MessageBox.Show("Appointments must be scheduled between 9:00 AM and 5:00 PM, Monday–Friday, Eastern Standard Time.",
-                        "Invalid Time", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    TimeZoneInfo estZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+                    DateTime startEST = TimeZoneInfo.ConvertTime(start, estZone);
+                    DateTime endEST = TimeZoneInfo.ConvertTime(end, estZone);
+
+                    if (startEST.DayOfWeek == DayOfWeek.Saturday || startEST.DayOfWeek == DayOfWeek.Sunday ||
+                        startEST < startEST.Date.AddHours(9) || endEST > endEST.Date.AddHours(17))
+                    {
+                        MessageBox.Show("Appointments must be scheduled between 9:00 AM and 5:00 PM, Monday–Friday, Eastern Standard Time.",
+                            "Invalid Time", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+                catch (TimeZoneNotFoundException)
+                {
+                    MessageBox.Show("The system's time zone configuration is invalid or unsupported.", "Time Zone Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -209,6 +222,7 @@ namespace PrachtSchedulingApp
 
                             // Populate the form controls with data
                             cboCustomer.SelectedValue = row["customerId"];
+                            cboUser.SelectedValue = row["userId"];
                             txtTitle.Text = row["title"].ToString();
                             txtDesc.Text = row["description"].ToString();
                             txtLocation.Text = row["location"].ToString();

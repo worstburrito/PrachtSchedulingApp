@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PrachtSchedulingApp.Login;
 
 namespace PrachtSchedulingApp
 {
@@ -109,10 +110,11 @@ namespace PrachtSchedulingApp
                     using (MySqlConnection con = new MySqlConnection(connectionString))
                     {
                         con.Open();
-                        string query = "UPDATE user SET active = 1 WHERE userId = @userId";
+                        string query = "UPDATE user SET active = 1, lastUpdate = NOW(), lastUpdateBy = @lastUpdateBy WHERE userId = @userId";
                         using (MySqlCommand cmd = new MySqlCommand(query, con))
                         {
                             cmd.Parameters.AddWithValue("@userId", userId);
+                            cmd.Parameters.AddWithValue("@lastUpdateBy", CurrentUser.UserId);
                             cmd.ExecuteNonQuery();
                         }
                     }
@@ -142,10 +144,11 @@ namespace PrachtSchedulingApp
                     using (MySqlConnection con = new MySqlConnection(connectionString))
                     {
                         con.Open();
-                        string query = "UPDATE user SET active = 0 WHERE userId = @userId";
+                        string query = "UPDATE user SET active = 1, lastUpdate = NOW(), lastUpdateBy = @lastUpdateBy WHERE userId = @userId";
                         using (MySqlCommand cmd = new MySqlCommand(query, con))
                         {
                             cmd.Parameters.AddWithValue("@userId", userId);
+                            cmd.Parameters.AddWithValue("@lastUpdateBy", CurrentUser.UserId);
                             cmd.ExecuteNonQuery();
                         }
                     }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PrachtSchedulingApp.Login;
 
 namespace PrachtSchedulingApp
 {
@@ -94,12 +95,15 @@ namespace PrachtSchedulingApp
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            if (dgvManageCustomerRecords.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a customer to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-        }
-
-        private void btnDeactivate_Click(object sender, EventArgs e)
-        {
-            
+            int customerId = Convert.ToInt32(dgvManageCustomerRecords.SelectedRows[0].Cells["customerId"].Value);
+            EditCustomer editCustomerForm = new EditCustomer(customerId, this);
+            editCustomerForm.ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -117,7 +121,6 @@ namespace PrachtSchedulingApp
                 return;
             }
 
-            // Retrieve customerId from the selected row
             int customerId;
             DataGridViewRow selectedRow = dgvManageCustomerRecords.SelectedRows[0];
             if (!int.TryParse(selectedRow.Cells["customerId"].Value?.ToString(), out customerId))
@@ -126,12 +129,11 @@ namespace PrachtSchedulingApp
                 return;
             }
 
-            // Confirm deletion
             DialogResult confirmation = MessageBox.Show("Are you sure you want to delete this customer?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (confirmation != DialogResult.Yes)
             {
-                return; // User chose not to delete
+                return;
             }
 
             using (MySqlConnection con = new MySqlConnection(connectionString))
@@ -193,6 +195,68 @@ namespace PrachtSchedulingApp
                     transaction.Rollback();
                     MessageBox.Show($"Error while removing customer: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        private void btnActivate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvManageCustomerRecords.SelectedRows.Count > 0)
+                {
+                    int customerId = Convert.ToInt32(dgvManageCustomerRecords.SelectedRows[0].Cells["customerId"].Value);
+
+                    string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
+                    using (MySqlConnection con = new MySqlConnection(connectionString))
+                    {
+                        con.Open();
+                        string query = "UPDATE customer SET active = 1, lastUpdate = NOW(), lastUpdateBy = @lastUpdateBy WHERE customerId = @customerId";
+                        using (MySqlCommand cmd = new MySqlCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@customerId", customerId);
+                            cmd.Parameters.AddWithValue("@lastUpdateBy", CurrentUser.UserId); 
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    PopulateGrid();
+                    MessageBox.Show("Customer has been activated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDeactivate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvManageCustomerRecords.SelectedRows.Count > 0)
+                {
+                    int customerId = Convert.ToInt32(dgvManageCustomerRecords.SelectedRows[0].Cells["customerId"].Value);
+
+                    string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
+                    using (MySqlConnection con = new MySqlConnection(connectionString))
+                    {
+                        con.Open();
+                        string query = "UPDATE customer SET active = 0, lastUpdate = NOW(), lastUpdateBy = @lastUpdateBy WHERE customerId = @customerId";
+                        using (MySqlCommand cmd = new MySqlCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@customerId", customerId);
+                            cmd.Parameters.AddWithValue("@lastUpdateBy", CurrentUser.UserId);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    PopulateGrid();
+                    MessageBox.Show("Customer has been activated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
