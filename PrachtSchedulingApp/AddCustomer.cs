@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static PrachtSchedulingApp.Login;
@@ -40,6 +41,20 @@ namespace PrachtSchedulingApp
             string country = txtCountry.Text.Trim();
             int userId = CurrentUser.UserId;
 
+            // Validate required fields
+            if (string.IsNullOrEmpty(customerName) || string.IsNullOrEmpty(address) || string.IsNullOrEmpty(postalCode) || string.IsNullOrEmpty(phone) || string.IsNullOrEmpty(city) || string.IsNullOrEmpty(country))
+            {
+                MessageBox.Show("You are missing fields required to save this customer.", "Missing Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string pattern = @"^\d{3}-\d{3}-\d{4}$";
+            if (!Regex.IsMatch(phone, pattern))
+            {
+                MessageBox.Show("Phone number must be in the format 000-000-0000.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; 
+            }
+
             using (MySqlConnection con = new MySqlConnection(connectionString))
             {
                 con.Open();
@@ -50,36 +65,65 @@ namespace PrachtSchedulingApp
                     int cityId;
                     int addressId;
 
-                    // Insert into Country table
-                    string insertCountryQuery = @"
-                INSERT INTO country (country, createDate, createdBy, lastUpdate, lastUpdateBy)
-                VALUES (@country, NOW(), @userId, NOW(), @userId);
-                SELECT LAST_INSERT_ID();";
-                    using (MySqlCommand cmd = new MySqlCommand(insertCountryQuery, con, transaction))
+                    // Check if the country exists
+                    string checkCountryQuery = "SELECT countryId FROM country WHERE country = @country;";
+                    using (MySqlCommand cmd = new MySqlCommand(checkCountryQuery, con, transaction))
                     {
                         cmd.Parameters.AddWithValue("@country", country);
-                        cmd.Parameters.AddWithValue("@userId", userId);
-                        countryId = Convert.ToInt32(cmd.ExecuteScalar());
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            countryId = Convert.ToInt32(result);
+                        }
+                        else
+                        {
+                            // Insert new country
+                            string insertCountryQuery = @"
+                    INSERT INTO country (country, createDate, createdBy, lastUpdate, lastUpdateBy)
+                    VALUES (@country, NOW(), @userId, NOW(), @userId);
+                    SELECT LAST_INSERT_ID();";
+                            using (MySqlCommand insertCmd = new MySqlCommand(insertCountryQuery, con, transaction))
+                            {
+                                insertCmd.Parameters.AddWithValue("@country", country);
+                                insertCmd.Parameters.AddWithValue("@userId", userId);
+                                countryId = Convert.ToInt32(insertCmd.ExecuteScalar());
+                            }
+                        }
                     }
 
-                    // Insert into City table
-                    string insertCityQuery = @"
-                INSERT INTO city (city, countryId, createDate, createdBy, lastUpdate, lastUpdateBy)
-                VALUES (@city, @countryId, NOW(), @userId, NOW(), @userId);
-                SELECT LAST_INSERT_ID();";
-                    using (MySqlCommand cmd = new MySqlCommand(insertCityQuery, con, transaction))
+                    // Check if the city exists
+                    string checkCityQuery = "SELECT cityId FROM city WHERE city = @city AND countryId = @countryId;";
+                    using (MySqlCommand cmd = new MySqlCommand(checkCityQuery, con, transaction))
                     {
                         cmd.Parameters.AddWithValue("@city", city);
                         cmd.Parameters.AddWithValue("@countryId", countryId);
-                        cmd.Parameters.AddWithValue("@userId", userId);
-                        cityId = Convert.ToInt32(cmd.ExecuteScalar());
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            cityId = Convert.ToInt32(result);
+                        }
+                        else
+                        {
+                            // Insert new city
+                            string insertCityQuery = @"
+                    INSERT INTO city (city, countryId, createDate, createdBy, lastUpdate, lastUpdateBy)
+                    VALUES (@city, @countryId, NOW(), @userId, NOW(), @userId);
+                    SELECT LAST_INSERT_ID();";
+                            using (MySqlCommand insertCmd = new MySqlCommand(insertCityQuery, con, transaction))
+                            {
+                                insertCmd.Parameters.AddWithValue("@city", city);
+                                insertCmd.Parameters.AddWithValue("@countryId", countryId);
+                                insertCmd.Parameters.AddWithValue("@userId", userId);
+                                cityId = Convert.ToInt32(insertCmd.ExecuteScalar());
+                            }
+                        }
                     }
 
                     // Insert into Address table
                     string insertAddressQuery = @"
-                INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy)
-                VALUES (@address, @address2, @cityId, @postalCode, @phone, NOW(), @userId, NOW(), @userId);
-                SELECT LAST_INSERT_ID();";
+            INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy)
+            VALUES (@address, @address2, @cityId, @postalCode, @phone, NOW(), @userId, NOW(), @userId);
+            SELECT LAST_INSERT_ID();";
                     using (MySqlCommand cmd = new MySqlCommand(insertAddressQuery, con, transaction))
                     {
                         cmd.Parameters.AddWithValue("@address", address);
@@ -93,8 +137,8 @@ namespace PrachtSchedulingApp
 
                     // Insert into Customer table
                     string insertCustomerQuery = @"
-                INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy)
-                VALUES (@customerName, @addressId, 1, NOW(), @userId, NOW(), @userId);";
+            INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy)
+            VALUES (@customerName, @addressId, 1, NOW(), @userId, NOW(), @userId);";
                     using (MySqlCommand cmd = new MySqlCommand(insertCustomerQuery, con, transaction))
                     {
                         cmd.Parameters.AddWithValue("@customerName", customerName);

@@ -119,7 +119,6 @@
     <Compile Include="AddUser.Designer.cs">
       <DependentUpon>AddUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="AppointmentsHelpers.cs" />
     <Compile Include="CalendarView.cs">
       <SubType>Form</SubType>
     </Compile>

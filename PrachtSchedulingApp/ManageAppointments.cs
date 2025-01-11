@@ -25,7 +25,7 @@ namespace PrachtSchedulingApp
         // Add Appointment Button - opens Add Appointment Form
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (!Utils.FormIsOpen("ManageCustomerRecords"))
+            if (!Utils.FormIsOpen("AddAppointment"))
             {
                 var addAppointment = new AddAppointment(this);
                 addAppointment.MdiParent = this.MdiParent;
