@@ -267,6 +267,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Login_History.txt" />
+    <Content Include="README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
