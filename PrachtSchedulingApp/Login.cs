@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.Win32;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,44 +20,64 @@ namespace PrachtSchedulingApp
 {
     public partial class Login : Form
     {
-        /* Note to evaluator: This Login form defaults to English. 
-         * If your region and language are set to Mexico and Mexico (Spanish) 
-         * the success/failure messages will translate */
+        /*
+         * This program looks at the regional format for Spanish (Mexico)
+         * and translates the login form from English to Spanish.
+         */
 
         public Login()
         {
             InitializeComponent();
         }
 
-        private string GetLanguageBasedOnRegion()
-        {
-            var culture = System.Globalization.CultureInfo.CurrentCulture;
-
-            if (culture.Name == "es-MX")
-                return "Spanish";
-            return "English"; // Default to English
-        }
-
+        // These are all the functions that load when the form loads
         private void Login_Load(object sender, EventArgs e)
         {
-            string language = GetLanguageBasedOnRegion();
+            string region = GetRegionFromLocaleCode();
 
-            if (language == "Spanish")
+
+            if (region == "Mexico")
             {
-                this.Text = "Iniciar sesión";
-                lblUsername.Text = "Nombre de usuario";
-                lblPassword.Text = "Contraseña";
-                btnLogin.Text = "Iniciar sesión";
-                btnCreateAccount.Text = "Crear cuenta";
+                lblLocation.Text = $"Ubicación detectada: {region}";
+                lblUsername.Text = $"Nombre de usuario";
+                lblPassword.Text = $"Contraseña";
+                btnLogin.Text = $"Acceso";
+                btnCreateAccount.Text = $"Crear una cuenta";
+                this.Text = $"Acceso";
             }
             else
             {
-                this.Text = "Login";
-                lblUsername.Text = "Username";
-                lblPassword.Text = "Password";
-                btnLogin.Text = "Login";
-                btnCreateAccount.Text = "Create Account";
+                lblLocation.Text = $"Detected Location: {region}";
+                lblUsername.Text = $"Username";
+                lblPassword.Text = $"Password";
+                btnLogin.Text = $"Login";
+                btnCreateAccount.Text = $"Create Account";
+                this.Text = $"Login";
             }
+        }
+
+        // This uses CultureInfo and RegionInfo to get users regional format
+        private string GetRegionFromLocaleCode()
+        {
+            string region = string.Empty;
+            try
+            {
+                // Get the current user's locale code (culture)
+                CultureInfo currentCulture = CultureInfo.CurrentCulture;
+
+                // Combine language and country (e.g., "en-US", "es-MX")
+                string localeCode = currentCulture.Name;
+
+                // Get the region name based on the locale code (e.g., "United States", "Mexico")
+                RegionInfo regionInfo = new RegionInfo(currentCulture.Name);
+                region = regionInfo.EnglishName;  // Country/Region name
+            }
+            catch (Exception ex)
+            {
+                region = "Error retrieving region: " + ex.Message;
+            }
+
+            return region;
         }
 
         // This checks the database to match the user/pw combo 
@@ -85,12 +107,12 @@ namespace PrachtSchedulingApp
                         {
                             if (reader.Read())
                             {
-                                int userId = reader.GetInt32(0); 
-                                return (true, userId); 
+                                int userId = reader.GetInt32(0);
+                                return (true, userId);
                             }
                             else
                             {
-                                return (false, 0); 
+                                return (false, 0);
                             }
                         }
                     }
@@ -103,14 +125,15 @@ namespace PrachtSchedulingApp
             }
         }
 
+        // This is the Login click button
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            string region = GetRegionFromLocaleCode();
+
             try
             {
                 string username = txtUsername.Text.Trim();
                 string password = txtPassword.Text.Trim();
-
-                string language = GetLanguageBasedOnRegion();
 
                 // Validate login and get userId
                 var (isValid, userId) = ValidateLogin(username, password);
@@ -122,8 +145,15 @@ namespace PrachtSchedulingApp
                     CurrentUser.UserId = userId;
 
                     // Display success message
-                    MessageBox.Show(language == "Spanish" ? Messages["LoginSuccess"].Spanish : Messages["LoginSuccess"].English,
-                                    language == "Spanish" ? "Éxito" : "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (region == "Mexico")
+                    {
+                        MessageBox.Show($"Inicio de sesión exitoso!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    
 
                     // Proceed to the next window
                     var mainWindow = new MainWindow(this);
@@ -135,16 +165,31 @@ namespace PrachtSchedulingApp
                     LogLoginHistory(username, false);
 
                     // Display error message
-                    MessageBox.Show(language == "Spanish" ? Messages["LoginFailed"].Spanish : Messages["LoginFailed"].English,
-                                    language == "Spanish" ? "Error de inicio de sesión" : "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (region == "Mexico")
+                    {
+                        MessageBox.Show("No se puede iniciar sesión. Verifique las credenciales de inicio de sesión e inténtelo nuevamente.", "Error de inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Unable to login. Please check login credentials and try again.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+                    return;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (region == "Mexico")
+                {
+                    MessageBox.Show($"Se produjo un error. Por favor inténtalo de nuevo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
-
 
         // This updates the Login History Log
         private void LogLoginHistory(string username, bool isSuccess)
@@ -187,14 +232,7 @@ namespace PrachtSchedulingApp
             public static int UserId { get; set; }
         }
 
-        // This stores the messages for the translation
-        private Dictionary<string, (string English, string Spanish)> Messages = new Dictionary<string, (string English, string Spanish)>()
-        {
-            { "LoginSuccess", ("Login successful!", "¡Inicio de sesión exitoso!") },
-            { "LoginFailed", ("The username and password do not match.", "El nombre de usuario y la contraseña no coinciden.") },
-            { "ErrorOccurred", ("An error occurred: {0}", "Ocurrió un error: {0}") }
-        };
-
+        // This opens the Create Account form to create an account => mostly for debugging/access the user db
         private void btnCreateAccount_Click(object sender, EventArgs e)
         {
             if (!Utils.FormIsOpen("AddUser"))
