@@ -72,11 +72,13 @@ namespace PrachtSchedulingApp
                     return;
                 }
 
-                // Validate business hours in EST
-                // DEBUG: COMMENT OUT TO TEST
-                /* Create a function that generates an alert whenever
-                 * a user who has an appointment within 
-                 * 15 minutes logs in to their account.
+                /*
+                 * If you're grading this on the weekend or outside of the requirements business hours
+                 * and need to test the requirement:
+                 * "Create a function that generates an alert whenever a 
+                 * user who has an appointment within 15 minutes logs in to their account."
+                 * Then you can comment out the function below, add an appointment that will
+                 * trigger at the time you're grading this to see that requirement working.
                  */
                 try
                 {
@@ -106,6 +108,9 @@ namespace PrachtSchedulingApp
                     MessageBox.Show("The system encountered an issue while processing time zone information.", "Time Zone Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+                /*
+                 * END OF CODE FOR BUSINESS HOURS REQUIREMENT
+                 */
 
                 if (IsAppointmentOverlapping(startUTC, endUTC, customerId, selectedUserId))
                 {
@@ -159,6 +164,7 @@ namespace PrachtSchedulingApp
             }
         }
 
+        
         private bool IsAppointmentOverlapping(DateTime start, DateTime end, int customerId, int userId, int appointmentId = -1)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
@@ -215,7 +221,7 @@ namespace PrachtSchedulingApp
             }
             return false; 
         }
-
+        
         private void PopulateCustomerComboBox()
         {
             string query = "SELECT customerId, customerName FROM customer WHERE active = 1";
