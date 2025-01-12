@@ -252,7 +252,7 @@ namespace PrachtSchedulingApp
                     }
 
                     PopulateGrid();
-                    MessageBox.Show("Customer has been activated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Customer has been deactivated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
