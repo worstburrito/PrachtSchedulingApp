@@ -74,6 +74,7 @@ namespace PrachtSchedulingApp
                 return;
             }
 
+            // Verify fields are trimmed
             string customerName = txtCustomerName.Text.Trim();
             string address = txtAddress.Text.Trim();
             string address2 = txtAddress2.Text.Trim();
@@ -83,17 +84,18 @@ namespace PrachtSchedulingApp
             string country = txtCountry.Text.Trim();
             int userId = CurrentUser.UserId;
 
-            // Validate required fields
+            // Verify fields are NOT empty (except for address2 which is optional)
             if (string.IsNullOrEmpty(customerName) || string.IsNullOrEmpty(address) || string.IsNullOrEmpty(postalCode) || string.IsNullOrEmpty(phone) || string.IsNullOrEmpty(city) || string.IsNullOrEmpty(country))
             {
                 MessageBox.Show("You are missing fields required to save this customer.", "Missing Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string phonePattern = @"^\d{3}-\d{3}-\d{4}$";
-            if (!Regex.IsMatch(phone, phonePattern))
+            // Verify the phone field only allows numbers and dashes
+            string pattern = @"^[\d-]+$";
+            if (!Regex.IsMatch(phone, pattern))
             {
-                MessageBox.Show("Phone number must be in the format 000-000-0000.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Phone number can only contain numbers and dashes.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
