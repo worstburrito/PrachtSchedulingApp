@@ -33,6 +33,15 @@ namespace PrachtSchedulingApp
             currentUserName = CurrentUser.Username;
             CheckUpcomingAppointments(currentUserId);
             lblUserStatus.Text = $"Currently logged in as: {currentUserName}";
+
+            /*
+             * The MANAGE USERS area is for testing/debug only.
+             * Hiding it unless "logging in" as myself.
+             */
+            if (currentUserName != "rachael")
+            {
+                manageUsers.Visible = false;
+            }
         }
 
         public void CheckUpcomingAppointments(int userId)
