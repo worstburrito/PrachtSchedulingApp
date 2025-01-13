@@ -35,7 +35,6 @@ namespace PrachtSchedulingApp
 
             try
             {
-                // Read all lines from the log file and get the last 25 lines using lambda expressions
                 if (File.Exists(logPath))
                 {
                     rtbReport.Clear();

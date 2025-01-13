@@ -89,7 +89,7 @@ namespace PrachtSchedulingApp
                                     if (appointmentStart <= currentTimePlus15Minutes)
                                     {
                                         MessageBox.Show($"You have an upcoming appointment: {appointmentTitle} at {appointmentStart}.", "Upcoming Appointment", MessageBoxButtons.OK);
-                                        
+
                                         if (!Utils.FormIsOpen("CalendarView"))
                                         {
                                             var calendarView = new CalendarView();
@@ -119,18 +119,9 @@ namespace PrachtSchedulingApp
             _login.Close();
         }
 
-        private void viewCustomerRecords_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void viewAllAppointments_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void viewSchedule_Click(object sender, EventArgs e)
         {
+            // Keep!
             if (!Utils.FormIsOpen("CalendarView"))
             {
                 var calendarView = new CalendarView();
@@ -139,30 +130,11 @@ namespace PrachtSchedulingApp
             }
         }
 
-        private void addAppointment_Click(object sender, EventArgs e)
-        {
-            if (!Utils.FormIsOpen("AddAppointment"))
-            {
-                var addAppointment = new AddAppointment();
-                addAppointment.MdiParent = this;
-                addAppointment.Show();
-            }
-        }
-
-        private void addCustomerRecords_Click(object sender, EventArgs e)
-        {
-            if (!Utils.FormIsOpen("AddCustomer"))
-            {
-                var addCustomer = new AddCustomer();
-                addCustomer.MdiParent = this;
-                addCustomer.Show();
-            }
-
-        }
 
         private void Report1_Click(object sender, EventArgs e)
         {
-            if (!Utils.FormIsOpen("AddAppointment"))
+            // Keep!
+            if (!Utils.FormIsOpen("Report1"))
             {
                 var report1 = new Report1();
                 report1.MdiParent = this;
@@ -172,7 +144,8 @@ namespace PrachtSchedulingApp
 
         private void Report2_Click(object sender, EventArgs e)
         {
-            if (!Utils.FormIsOpen("AddAppointment"))
+            // Keep!
+            if (!Utils.FormIsOpen("Report2"))
             {
                 var report2 = new Report2();
                 report2.MdiParent = this;
@@ -182,27 +155,8 @@ namespace PrachtSchedulingApp
 
         private void Report3_Click(object sender, EventArgs e)
         {
-            if (!Utils.FormIsOpen("AddAppointment"))
-            {
-                var loginHistoryReport = new LoginHistoryReport();
-                loginHistoryReport.MdiParent = this;
-                loginHistoryReport.Show();
-            }
-        }
-
-        private void Report4_Click(object sender, EventArgs e)
-        {
-            if (!Utils.FormIsOpen("AddAppointment"))
-            {
-                var loginHistoryReport = new LoginHistoryReport();
-                loginHistoryReport.MdiParent = this;
-                loginHistoryReport.Show();
-            }
-        }
-
-        private void LoginHistory_Click(object sender, EventArgs e)
-        {
-            if (!Utils.FormIsOpen("AddAppointment"))
+            // Keep!
+            if (!Utils.FormIsOpen("LoginHistoryReport"))
             {
                 var loginHistoryReport = new LoginHistoryReport();
                 loginHistoryReport.MdiParent = this;
@@ -210,8 +164,9 @@ namespace PrachtSchedulingApp
             }
         }
         
-               private void manageUsers_Click(object sender, EventArgs e)
+        private void manageUsers_Click(object sender, EventArgs e)
         {
+            // Keep!
             if (!Utils.FormIsOpen("ManageUsers"))
             {
                 var manageUsers = new ManageUsers();
@@ -222,6 +177,7 @@ namespace PrachtSchedulingApp
 
         private void manageCustomerRecords_Click(object sender, EventArgs e)
         {
+            // Keep!
             if (!Utils.FormIsOpen("ManageCustomerRecords"))
             {
                 var manageCustomerRecords = new ManageCustomerRecords();
@@ -232,11 +188,23 @@ namespace PrachtSchedulingApp
 
         private void manageAppointments_Click(object sender, EventArgs e)
         {
+            // Keep!
             if (!Utils.FormIsOpen("ManageAppointments"))
             {
                 var manageAppointments = new ManageAppointments();
                 manageAppointments.MdiParent = this;
                 manageAppointments.Show();
+            }
+        }
+
+        private void numberOfAppointmentsByCustomerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Keep!
+            if (!Utils.FormIsOpen("Report3"))
+            {
+                var report3 = new Report3();
+                report3.MdiParent = this;
+                report3.Show();
             }
         }
     }

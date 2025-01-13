@@ -32,6 +32,7 @@ namespace PrachtSchedulingApp
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+            // This will show if something isn't working properly with the comboboxes
             try
             {
                 if (cboCustomer.SelectedValue == null || cboUser.SelectedValue == null)
@@ -47,6 +48,7 @@ namespace PrachtSchedulingApp
                     return;
                 }
 
+                // form variables
                 int currentUserId = CurrentUser.UserId;
                 string title = txtTitle.Text.Trim();
                 string description = txtDesc.Text.Trim();
@@ -57,12 +59,14 @@ namespace PrachtSchedulingApp
                 DateTime start = dtpStart.Value;
                 DateTime end = dtpEnd.Value;
 
+                // checks for empty textboxes
                 if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(location) || string.IsNullOrEmpty(contact) || string.IsNullOrEmpty(type))
                 {
                     MessageBox.Show("Title, Location, Contact, and Type are required to save the appointment.", "Missing Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
+                // this checks that the start/end dates are valid
                 DateTime startUTC = start.ToUniversalTime();
                 DateTime endUTC = end.ToUniversalTime();
 
@@ -71,6 +75,7 @@ namespace PrachtSchedulingApp
                     MessageBox.Show("End date cannot be earlier than or equal to the start date.", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
 
                 /*
                  * If you're grading this on the weekend or outside of the requirements business hours
@@ -112,6 +117,7 @@ namespace PrachtSchedulingApp
                  * END OF CODE FOR BUSINESS HOURS REQUIREMENT
                  */
 
+                // this checks if the appointment is overlapping with either a customer or a user
                 if (IsAppointmentOverlapping(startUTC, endUTC, customerId, selectedUserId))
                 {
                     MessageBox.Show("The selected time slot overlaps with an existing appointment for the customer or user. Please choose a different time.",
@@ -119,6 +125,7 @@ namespace PrachtSchedulingApp
                     return;
                 }
 
+                // runs the database
                 string connectionString = ConfigurationManager.ConnectionStrings["localdb"]?.ConnectionString;
                 if (string.IsNullOrEmpty(connectionString))
                 {
@@ -164,7 +171,7 @@ namespace PrachtSchedulingApp
             }
         }
 
-        
+        // this method runs the database for overlapping appointments
         private bool IsAppointmentOverlapping(DateTime start, DateTime end, int customerId, int userId, int appointmentId = -1)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
@@ -222,6 +229,7 @@ namespace PrachtSchedulingApp
             return false; 
         }
         
+        // these populate the comboboxes for customer and user selection
         private void PopulateCustomerComboBox()
         {
             string query = "SELECT customerId, customerName FROM customer WHERE active = 1";

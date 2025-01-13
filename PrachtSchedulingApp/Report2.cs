@@ -18,152 +18,88 @@ namespace PrachtSchedulingApp
         {
             InitializeComponent();
             PopulateUserComboBox();
-            PopulateGrid();
         }
 
         private void btnFindAppointments_Click(object sender, EventArgs e)
         {
             try
             {
-                string user = cboUser.Text;
-
-                if (string.IsNullOrEmpty(user))
+                if (cboUser.SelectedValue == null || cboUser.Text == null)
                 {
-                    MessageBox.Show("Please select a user before searching.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please select a valid user.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
+                int selectedUserId = Convert.ToInt32(cboUser.SelectedValue);
+                string selectedUsername = cboUser.Text;
+
                 string connectionString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
+
                 using (MySqlConnection con = new MySqlConnection(connectionString))
                 {
                     con.Open();
 
                     string query = @"
-                    SELECT 
-                        a.appointmentId,
-                        c.customerName AS CustomerName,
-                        u1.userName AS UserName,
-                        a.title,
-                        a.description,
-                        a.location,
-                        a.contact,
-                        a.type,
-                        a.url,
-                        a.start,
-                        a.end,
-                        a.createDate,
-                        u3.userName AS CreatedBy,
-                        a.lastUpdate,
-                        u2.userName AS LastUpdatedBy
-                    FROM 
-                        appointment a
-                    LEFT JOIN 
-                        customer c ON a.customerId = c.customerId
-                    LEFT JOIN 
-                        user u1 ON a.userId = u1.userId
-                    LEFT JOIN 
-                        user u2 ON a.lastUpdateBy = u2.userId
-                    LEFT JOIN 
-                        user u3 ON a.createdBy = u3.userId
-                    WHERE
-                        u1.userName = @user
-                    ORDER BY
-                        a.start;";
+                SELECT 
+                    a.title AS Title, 
+                    a.description AS Description, 
+                    a.location AS Location, 
+                    a.contact AS Contact, 
+                    a.type AS Type, 
+                    a.url AS URL, 
+                    a.start AS StartDate, 
+                    a.end AS EndDate
+                FROM 
+                    appointment a
+                WHERE 
+                    a.userId = @UserId";
 
                     MySqlCommand cmd = new MySqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@user", user);
+                    cmd.Parameters.AddWithValue("@UserId", selectedUserId);
 
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                    DataTable findAppointments = new DataTable();
+                    DataTable appointmentData = new DataTable();
+                    adapter.Fill(appointmentData);
 
-                    // Populate DataTable
-                    adapter.Fill(findAppointments);
-                    // Convert to local time
-                    DatabaseHelper.TimeHelper(findAppointments, "start", "end", "createDate", "lastUpdate");
-                    // Populate grid
-                    DatabaseHelper.PopulateAppointments(dgvAppointments, findAppointments);
+                    var sortedAppointments = appointmentData.AsEnumerable()
+                        .OrderBy(row => row.Field<DateTime>("StartDate"))
+                        .Select(row => new
+                        {
+                            Title = row.Field<string>("Title"),
+                            Description = row.Field<string>("Description"),
+                            Location = row.Field<string>("Location"),
+                            Contact = row.Field<string>("Contact"),
+                            Type = row.Field<string>("Type"),
+                            URL = row.Field<string>("URL"),
+                            StartDate = TimeZoneInfo.ConvertTimeFromUtc(row.Field<DateTime>("StartDate"), TimeZoneInfo.Local),
+                            EndDate = TimeZoneInfo.ConvertTimeFromUtc(row.Field<DateTime>("EndDate"), TimeZoneInfo.Local)
+                        })
+                        .ToList();
+
+                    StringBuilder report = new StringBuilder();
+                    report.AppendLine($"Appointment Schedule for Username: {selectedUsername}");
+                    report.AppendLine(new string('-', 50));
+
+                    foreach (var appointment in sortedAppointments)
+                    {
+                        report.AppendLine($"Title: {appointment.Title}");
+                        report.AppendLine($"Description: {appointment.Description}");
+                        report.AppendLine($"Location: {appointment.Location}");
+                        report.AppendLine($"Contact: {appointment.Contact}");
+                        report.AppendLine($"Type: {appointment.Type}");
+                        report.AppendLine($"URL: {appointment.URL}");
+                        report.AppendLine($"Start: {appointment.StartDate}");
+                        report.AppendLine($"End: {appointment.EndDate}");
+                        report.AppendLine(new string('-', 50));
+                    }
+
+                    rtbReport.Text = report.ToString();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            PopulateGrid();
-        }
-
-        public void PopulateGrid()
-        {
-            try
-            {
-                DataTable appointments = GetAppointmentData();
-                DatabaseHelper.TimeHelper(appointments, "start", "end", "createDate", "lastUpdate");
-                DatabaseHelper.PopulateAppointments(dgvAppointments, appointments);
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show($"Database error: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (InvalidOperationException ex)
-            {
-                MessageBox.Show($"Configuration error: {ex.Message}", "Configuration Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private DataTable GetAppointmentData()
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["localdb"]?.ConnectionString;
-            if (string.IsNullOrEmpty(connectionString))
-                throw new InvalidOperationException("Database connection string is missing or invalid.");
-
-            DataTable appts = new DataTable();
-            using (MySqlConnection con = new MySqlConnection(connectionString))
-            {
-                con.Open();
-                string query = @"
-            SELECT 
-                a.appointmentId,
-                c.customerName AS CustomerName,
-                u1.userName AS UserName,
-                a.title,
-                a.description,
-                a.location,
-                a.contact,
-                a.type,
-                a.url,
-                a.start,
-                a.end,
-                a.createDate,
-                u3.userName AS CreatedBy,
-                a.lastUpdate,
-                u2.userName AS LastUpdatedBy
-            FROM 
-                appointment a
-            LEFT JOIN 
-                customer c ON a.customerId = c.customerId
-            LEFT JOIN 
-                user u1 ON a.userId = u1.userId
-            LEFT JOIN 
-                user u2 ON a.lastUpdateBy = u2.userId
-            LEFT JOIN 
-                user u3 ON a.createdBy = u3.userId
-            ORDER BY
-                a.start;";
-
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
-                {
-                    adapter.Fill(appts);
-                }
-            }
-            return appts;
         }
 
         private void PopulateUserComboBox()

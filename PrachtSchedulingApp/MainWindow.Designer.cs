@@ -39,6 +39,7 @@
             this.manageUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.userStatus = new System.Windows.Forms.StatusStrip();
             this.lblUserStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.numberOfAppointmentsByCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.userStatus.SuspendLayout();
             this.SuspendLayout();
@@ -84,6 +85,7 @@
             this.runReport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Report1,
             this.Report2,
+            this.numberOfAppointmentsByCustomerToolStripMenuItem,
             this.Report3});
             this.runReport.Name = "runReport";
             this.runReport.Size = new System.Drawing.Size(78, 22);
@@ -92,21 +94,21 @@
             // Report1
             // 
             this.Report1.Name = "Report1";
-            this.Report1.Size = new System.Drawing.Size(232, 22);
+            this.Report1.Size = new System.Drawing.Size(282, 22);
             this.Report1.Text = "Appointment Types by Month";
             this.Report1.Click += new System.EventHandler(this.Report1_Click);
             // 
             // Report2
             // 
             this.Report2.Name = "Report2";
-            this.Report2.Size = new System.Drawing.Size(232, 22);
+            this.Report2.Size = new System.Drawing.Size(282, 22);
             this.Report2.Text = "User Schedules";
             this.Report2.Click += new System.EventHandler(this.Report2_Click);
             // 
             // Report3
             // 
             this.Report3.Name = "Report3";
-            this.Report3.Size = new System.Drawing.Size(232, 22);
+            this.Report3.Size = new System.Drawing.Size(282, 22);
             this.Report3.Text = "Login History Report";
             this.Report3.Click += new System.EventHandler(this.Report3_Click);
             // 
@@ -133,6 +135,13 @@
             this.lblUserStatus.Name = "lblUserStatus";
             this.lblUserStatus.Size = new System.Drawing.Size(93, 17);
             this.lblUserStatus.Text = "Placeholder Text";
+            // 
+            // numberOfAppointmentsByCustomerToolStripMenuItem
+            // 
+            this.numberOfAppointmentsByCustomerToolStripMenuItem.Name = "numberOfAppointmentsByCustomerToolStripMenuItem";
+            this.numberOfAppointmentsByCustomerToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
+            this.numberOfAppointmentsByCustomerToolStripMenuItem.Text = "Number of Appointments by Customer";
+            this.numberOfAppointmentsByCustomerToolStripMenuItem.Click += new System.EventHandler(this.numberOfAppointmentsByCustomerToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -173,6 +182,7 @@
         private System.Windows.Forms.ToolStripMenuItem manageUsers;
         private System.Windows.Forms.StatusStrip userStatus;
         private System.Windows.Forms.ToolStripStatusLabel lblUserStatus;
+        private System.Windows.Forms.ToolStripMenuItem numberOfAppointmentsByCustomerToolStripMenuItem;
     }
 }
 

@@ -36,10 +36,11 @@
             // 
             // rtbReport
             // 
+            this.rtbReport.Dock = System.Windows.Forms.DockStyle.Top;
             this.rtbReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.rtbReport.Location = new System.Drawing.Point(3, 55);
             this.rtbReport.Name = "rtbReport";
-            this.rtbReport.Size = new System.Drawing.Size(800, 455);
+            this.rtbReport.Size = new System.Drawing.Size(803, 455);
             this.rtbReport.TabIndex = 3;
             this.rtbReport.Text = "";
             // 
@@ -72,7 +73,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(829, 545);
+            this.ClientSize = new System.Drawing.Size(829, 543);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Report1";
             this.Padding = new System.Windows.Forms.Padding(10);
