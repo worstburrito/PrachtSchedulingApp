@@ -46,6 +46,7 @@
             // 
             // rtbReport
             // 
+            this.rtbReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.rtbReport.Location = new System.Drawing.Point(3, 56);
             this.rtbReport.Name = "rtbReport";
             this.rtbReport.Size = new System.Drawing.Size(803, 462);

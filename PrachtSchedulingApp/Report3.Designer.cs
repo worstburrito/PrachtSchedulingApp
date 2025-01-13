@@ -39,6 +39,7 @@
             // rtbReport
             // 
             this.rtbReport.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.rtbReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.rtbReport.Location = new System.Drawing.Point(0, 91);
             this.rtbReport.Name = "rtbReport";
             this.rtbReport.Size = new System.Drawing.Size(800, 455);

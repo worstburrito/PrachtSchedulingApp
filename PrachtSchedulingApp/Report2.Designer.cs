@@ -30,8 +30,8 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblSelectUser = new System.Windows.Forms.Label();
-            this.btnRunReport = new System.Windows.Forms.Button();
             this.cboUser = new System.Windows.Forms.ComboBox();
+            this.btnRunReport = new System.Windows.Forms.Button();
             this.rtbReport = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +63,14 @@
             this.lblSelectUser.TabIndex = 3;
             this.lblSelectUser.Text = "Select User:";
             // 
+            // cboUser
+            // 
+            this.cboUser.FormattingEnabled = true;
+            this.cboUser.Location = new System.Drawing.Point(3, 26);
+            this.cboUser.Name = "cboUser";
+            this.cboUser.Size = new System.Drawing.Size(323, 21);
+            this.cboUser.TabIndex = 5;
+            // 
             // btnRunReport
             // 
             this.btnRunReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
@@ -74,17 +82,10 @@
             this.btnRunReport.UseVisualStyleBackColor = true;
             this.btnRunReport.Click += new System.EventHandler(this.btnFindAppointments_Click);
             // 
-            // cboUser
-            // 
-            this.cboUser.FormattingEnabled = true;
-            this.cboUser.Location = new System.Drawing.Point(3, 26);
-            this.cboUser.Name = "cboUser";
-            this.cboUser.Size = new System.Drawing.Size(323, 21);
-            this.cboUser.TabIndex = 5;
-            // 
             // rtbReport
             // 
             this.rtbReport.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.rtbReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.rtbReport.Location = new System.Drawing.Point(10, 99);
             this.rtbReport.Name = "rtbReport";
             this.rtbReport.Size = new System.Drawing.Size(809, 455);
